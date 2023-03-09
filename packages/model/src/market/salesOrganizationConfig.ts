@@ -1,5 +1,5 @@
 import type { Config } from './config'
-import type { SalesOrganization } from '@/mdm/salesOrganization'
+import type { SalesOrganization } from '../mdm/salesOrganization'
 import type { Pager, Sort } from '@angelyeast/types/request'
 
 export const salesOrganizationConfig = {

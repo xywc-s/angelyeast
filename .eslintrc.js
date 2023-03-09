@@ -1,7 +1,6 @@
 const { defineConfig } = require('eslint-define-config')
 
 module.exports = defineConfig({
-  root: true,
   env: {
     es2021: true,
     browser: true,
@@ -38,16 +37,16 @@ module.exports = defineConfig({
       files: ['*.json', '*.json5', '*.jsonc'],
       parser: 'jsonc-eslint-parser'
     },
-    // {
-    //   files: ['*.ts', '*.vue'],
-    //   rules: {
-    //     'no-undef': 'off'
-    //   }
-    // },
-    // {
-    //   files: ['*.js'],
-    //   rules: {}
-    // },
+    {
+      files: ['*.ts', '*.vue'],
+      rules: {
+        'no-undef': 'off'
+      }
+    },
+    {
+      files: ['*.js'],
+      rules: {}
+    },
     {
       files: ['**/__tests__/**'],
       rules: {

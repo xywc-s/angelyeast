@@ -2,9 +2,6 @@
   "extends": "../../tsconfig.json",
   "exclude": ["node_modules", "dist", "tsc", "es", "lib"],
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "composite": true
   }
 }
