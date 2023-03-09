@@ -1,4 +1,4 @@
-export interface AngelResponse<D = any, O = any> {
+export declare interface AngelResponse<D = any, O = any> {
   success: boolean
   message: string | null
   rows: D[]
@@ -8,7 +8,7 @@ export interface AngelResponse<D = any, O = any> {
   footer: any[]
 }
 
-export type Pager = {
+export declare type Pager = {
   /**
    * 页码
    */
@@ -19,7 +19,7 @@ export type Pager = {
   rows: number
 }
 
-export type Sort = {
+export declare type Sort = {
   /**
    * 排序字段名
    */

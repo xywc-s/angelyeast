@@ -4,10 +4,6 @@
   "description": "类型定义包",
   "scripts": {},
   "keywords": [],
-  "main": "src",
-  "files": [
-    "src"
-  ],
   "author": {
     "name": "xywc-s",
     "email": "xywc_s@foxmail.com",
