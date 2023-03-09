@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "ES2015",
+    "module": "ESNext",
+    "strict": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "lib": ["ESNext", "DOM", "WebWorker"],
+    "moduleResolution": "node",
+    "useDefineForClassFields": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "allowJs": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": false,
+    "noImplicitOverride": true
+  }
+}

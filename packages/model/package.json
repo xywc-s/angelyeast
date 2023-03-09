@@ -1,0 +1,27 @@
+{
+  "name": "@angelyeast/models",
+  "version": "1.0.0",
+  "description": "数据模型包",
+  "scripts": {
+    "build": "rm -rf es && rm -rf lib && vite build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "xywc-s",
+    "email": "xywc_s@foxmail.com",
+    "url": "https://github.com/xywc-s"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "devDependencies": {
+    "@angelyeast/types": "workspace:^1.0.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.*"
+  }
+}

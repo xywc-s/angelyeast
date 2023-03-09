@@ -1,0 +1,20 @@
+{
+  "name": "angelyeast",
+  "version": "1.0.0",
+  "description": "安琪酵母通用开发工具包",
+  "private": "true",
+  "scripts": {},
+  "keywords": [],
+  "author": {
+    "name": "xywc-s",
+    "email": "xywc_s@foxmail.com",
+    "url": "https://github.com/xywc-s"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "fast-glob": "^3.2.12",
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "^2.1.0",
+    "vue": "^3.2.47"
+  }
+}
