@@ -1,12 +1,13 @@
 const { defineConfig } = require('eslint-define-config')
 
 module.exports = defineConfig({
+  root: true,
   env: {
     es2021: true,
     browser: true,
     node: true
   },
-  ignorePatterns: ['es', 'lib', 'node_modules'],
+  ignorePatterns: ['node_modules', 'lib', 'es'],
   parser: '@typescript-eslint/parser',
   extends: ['standard', 'prettier'],
   plugins: ['import', 'prettier'],
@@ -36,12 +37,6 @@ module.exports = defineConfig({
     {
       files: ['*.json', '*.json5', '*.jsonc'],
       parser: 'jsonc-eslint-parser'
-    },
-    {
-      files: ['*.ts', '*.vue'],
-      rules: {
-        'no-undef': 'off'
-      }
     },
     {
       files: ['*.js'],
@@ -129,8 +124,14 @@ module.exports = defineConfig({
         }
       },
       rules: {
+        // https://eslint.vuejs.org/rules/ 查看具体规则
         'no-undef': 'off',
-        'vue/no-unused-vars': 'off'
+        'vue/no-unused-vars': 'error',
+        'vue/no-unused-components': 'error',
+        'vue/multi-word-component-names': 0, // 组件名必须多个单词 0: 关闭, 等价于off
+        'vue/require-default-prop': 'off', // props 必须定义默认值
+        'vue/require-prop-types': 0, // props必须定义类型
+        'no-dupe-class-members': 'off' // ts有校验, 不需要此规则
       }
     }
   ]
