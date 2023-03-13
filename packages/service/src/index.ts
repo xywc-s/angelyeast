@@ -1,13 +1,12 @@
-import { BaseConfig, ServiceName } from './config'
-import { get } from 'lodash-es'
-import type { AxiosRequestConfig } from 'axios'
+import { BaseConfig } from './config'
 import * as Auth from './auth'
 import * as BFF from './bff'
 import * as MDM from './mdm'
 import * as Market from './market'
 import * as MMS from './mms'
+import type { AxiosRequestConfig } from 'axios'
 
-const Services = {
+const ServiceMap = {
   /**
    * 鉴权中心
    */
@@ -24,8 +23,18 @@ const Services = {
   /**
    * 物料管理系统
    */
-  MMS
+  MMS,
+  /**
+   * 库存中心
+   */
+  Inventory: null,
+  /**
+   * 客户信息
+   */
+  CIMS: null
 }
+export type Services = Readonly<typeof ServiceMap>
+export type ServiceName = keyof Services
 
 /**
  * 设置所有服务的默认配置, 若指定服务名称, 则仅设置指定的服务配置
@@ -56,12 +65,13 @@ export function setServiceConfig(
 /**
  * 使用服务API, 指定名称则返回指定服务, 否则返回所有服务
  * @param name 服务名
- * @returns 服务
  */
+export function useService<K extends ServiceName>(name: K): Services[K]
+export function useService(): Services
 export function useService(name?: ServiceName) {
   if (name) {
-    return get(Services, name)
+    return ServiceMap[name]
   } else {
-    return Services
+    return ServiceMap
   }
 }

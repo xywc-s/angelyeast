@@ -1,8 +1,6 @@
 // import qs from 'qs'
 import type { AxiosRequestConfig } from 'axios'
-
-export const ServiceNames = ['BFF', 'Auth', 'Market', 'MDM', 'MMS', 'CIMS', 'Inventory'] as const
-export type ServiceName = (typeof ServiceNames)[number]
+import type { ServiceName } from '../index'
 export const BaseConfig = new Map<ServiceName | 'default', AxiosRequestConfig>()
 
 export const ContentTypes = {

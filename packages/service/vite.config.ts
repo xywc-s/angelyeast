@@ -16,6 +16,7 @@ export default defineConfig({
     outDir: 'es',
     minify: false,
     rollupOptions: {
+      external: ['lodash-es', 'axios'],
       input: 'src/index.ts',
       output: [
         {
