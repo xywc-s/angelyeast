@@ -16,7 +16,16 @@ export default defineConfig({
     outDir: 'es',
     minify: false,
     rollupOptions: {
-      external: ['element-plus', 'lodash-es', '@vueuse/core', '@xywc-s/utils', 'vue'],
+      external: [
+        'element-plus',
+        'lodash-es',
+        '@vueuse/core',
+        '@xywc-s/utils',
+        'vue',
+        '@angelyeast/models',
+        '@angelyeast/types',
+        '@angelyeast/services'
+      ],
       input: 'src/index.ts',
       output: [
         {

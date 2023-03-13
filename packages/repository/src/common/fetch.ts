@@ -53,7 +53,7 @@ export type FetchOptions<T, P> = {
   /**
    * 钩子
    */
-  hooks?: Partial<FetchOptionHooks<P, T>>
+  hooks?: FetchOptionHooks<P, T>
   /**
    * 接口返回成功时是否自动弹出通知消息,内容为接口返回的message
    * @description 处理一些查询接口成功时,默认返回成功查询成功提示, 设置为false可取消提示, 实际场景中查询成功并不需要提示,仅失败后需要提示
@@ -62,8 +62,8 @@ export type FetchOptions<T, P> = {
 }
 
 export interface FetchOptionHooks<P, T> {
-  before: (p: P) => any
-  success: (response: T) => void
-  error: (error: any) => void
-  finally: () => void
+  before?: (p: P) => any
+  success?: (response: T) => void
+  error?: (error: any) => void
+  finally?: () => void
 }

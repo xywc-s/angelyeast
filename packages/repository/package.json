@@ -30,7 +30,7 @@
     "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
-    "@angelyeast/services": "workspace:^1.0.0",
+    "@angelyeast/services": "^1.0.0",
     "@angelyeast/models": "^1.0.0",
     "@angelyeast/types": "^1.0.0",
     "@vueuse/core": "^9.13.0",
