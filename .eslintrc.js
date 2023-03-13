@@ -39,6 +39,12 @@ module.exports = defineConfig({
       parser: 'jsonc-eslint-parser'
     },
     {
+      rules: {
+        files: ['*.ts'],
+        'no-redeclare': 'off'
+      }
+    },
+    {
       files: ['*.js'],
       rules: {}
     },
