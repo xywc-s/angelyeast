@@ -8,5 +8,8 @@
     "name": "xywc-s",
     "email": "xywc_s@foxmail.com",
     "url": "https://github.com/xywc-s"
-  }
+  },
+  "type": "module",
+  "main": "index.d.ts",
+  "types": "index.d.ts"
 }
