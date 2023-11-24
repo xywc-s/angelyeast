@@ -1,7 +1,0 @@
-export * as MaterialSalesPrice from './materialSalesPrice'
-export * as SalesOrganizationConfig from './salesOrganizationConfig'
-export * as SalesOrganization from './salesOrganization'
-export * as Trade from './trade'
-export * as TradeRecord from './tradeRecord'
-export * as Config from './config'
-export * as SalesOrder from './salesOrder'
