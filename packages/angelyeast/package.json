@@ -1,0 +1,32 @@
+{
+  "name": "angelyeast",
+  "version": "1.2.0",
+  "description": "安琪前端库",
+  "scripts": {
+    "build": "rm -rf es && rm -rf lib && vite build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "xywc-s",
+    "email": "xywc_s@foxmail.com",
+    "url": "https://github.com/xywc-s"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@angelyeast/service": "workspace:^1.0.0",
+    "@angelyeast/repository": "workspace:^1.0.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.*",
+    "@angelyeast/service": "^1.0.0",
+    "@angelyeast/model": "^1.0.0",
+    "@angelyeast/component": "^1.0.0",
+    "@angelyeast/repository": "^1.0.0"
+  }
+}

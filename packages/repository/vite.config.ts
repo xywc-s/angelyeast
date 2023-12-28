@@ -4,7 +4,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [
     dts({
-      outputDir: ['es', 'lib']
+      outputDir: 'types'
     })
   ],
   resolve: {
@@ -13,30 +13,23 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: 'es',
+    outDir: 'lib',
     minify: false,
     rollupOptions: {
       external: [
+        'axios',
         'element-plus',
         'lodash-es',
         '@vueuse/core',
         '@xywc-s/utils',
         'vue',
-        '@angelyeast/models',
-        '@angelyeast/types',
-        '@angelyeast/services'
+        '@angelyeast/model',
+        '@angelyeast/types'
       ],
       input: 'src/index.ts',
       output: [
         {
           format: 'es',
-          entryFileNames: '[name].js',
-          dir: 'es',
-          preserveModules: true,
-          preserveModulesRoot: 'src'
-        },
-        {
-          format: 'cjs',
           entryFileNames: '[name].js',
           dir: 'lib',
           preserveModules: true,

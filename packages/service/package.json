@@ -1,0 +1,38 @@
+{
+  "name": "@angelyeast/service",
+  "version": "1.2.0",
+  "description": "安琪服务包",
+  "scripts": {
+    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "xywc-s",
+    "email": "xywc_s@foxmail.com",
+    "url": "https://github.com/xywc-s"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "devDependencies": {
+    "qs": "^6.11.1",
+    "lodash-es": "^4.17.21",
+    "axios": "^1.3.4",
+    "@angelyeast/repository": "workspace:*",
+    "@angelyeast/types": "workspace:*",
+    "@angelyeast/model": "workspace:*"
+  },
+  "peerDependencies": {
+    "@angelyeast/model": "workspace:*",
+    "@angelyeast/repository": "workspace:*",
+    "@angelyeast/types": "workspace:*",
+    "lodash-es": "^4.17.21",
+    "axios": "^1.3.4",
+    "vue": ">=3.2.*"
+  }
+}

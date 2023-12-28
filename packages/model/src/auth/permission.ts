@@ -12,7 +12,7 @@ export type Permission = {
 
 export type RolePermission = Pick<Permission, 'permissionId' | 'permissionName' | 'permissionValue'>
 
-export type PermissionCode = string | string[] | undefined
+export type PermissionCode = string | string[]
 
 type PermissionChecked = {
   /**

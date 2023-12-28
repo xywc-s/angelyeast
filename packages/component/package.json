@@ -1,0 +1,37 @@
+{
+  "name": "@angelyeast/component",
+  "version": "1.2.0",
+  "description": "组件包",
+  "scripts": {
+    "build": "rm -rf es && rm -rf lib && vite build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "xywc-s",
+    "email": "xywc_s@foxmail.com",
+    "url": "https://github.com/xywc-s"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "@angelyeast/service": "workspace:^1.0.0",
+    "@angelyeast/types": "workspace:^1.0.0",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "element-plus": "^2.2.36",
+    "vue-router": "^4.1.6"
+  },
+  "peerDependencies": {
+    "@angelyeast/service": "workspace:^1.0.0",
+    "@angelyeast/types": "^1.0.0",
+    "element-plus": "^2.2.36",
+    "unplugin-vue-define-options": "^1.2.4",
+    "vue": "^3.3.*",
+    "vue-router": "^4.1.6"
+  }
+}

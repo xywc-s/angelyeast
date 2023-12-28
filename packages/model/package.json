@@ -1,9 +1,9 @@
 {
-  "name": "@angelyeast/models",
-  "version": "1.0.3",
+  "name": "@angelyeast/model",
+  "version": "1.2.0",
   "description": "数据模型包",
   "scripts": {
-    "build": "rm -rf es && rm -rf lib && vite build"
+    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
   },
   "keywords": [],
   "author": {
@@ -13,17 +13,21 @@
   },
   "type": "module",
   "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "module": "lib/index.js",
+  "types": "types/index.d.ts",
   "files": [
     "lib",
-    "es"
+    "types"
   ],
+  "engines": {
+    "node": ">=16 <=20",
+    "pnpm": "^7"
+  },
   "devDependencies": {
-    "@angelyeast/types": "workspace:^1.0.0"
+    "@angelyeast/types": "workspace:*"
   },
   "peerDependencies": {
-    "vue": "^3.2.*",
-    "@angelyeast/types": "^1.0.0"
+    "vue": ">=3.*",
+    "@angelyeast/types": "workspace:*"
   }
 }

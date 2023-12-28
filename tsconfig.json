@@ -1,9 +1,9 @@
 {
+  "exclude": ["node_modules", "dist", "tsc"],
   "compilerOptions": {
     "strict": true,
     "module": "ESNext",
-    "target": "ES2015",
-    "lib": ["ESNext", "DOM", "WebWorker"],
+    "target": "ES6",
     "noEmit": true, //禁止ts生成, 通过其他工具生成，如dts
     "isolatedModules": true,
     "noUnusedLocals": true,

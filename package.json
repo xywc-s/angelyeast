@@ -1,9 +1,11 @@
 {
   "name": "angelyeast",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "安琪酵母通用开发工具包",
   "private": "true",
-  "scripts": {},
+  "scripts": {
+    "pub": "bumpp -r"
+  },
   "keywords": [],
   "packageManager": "pnpm@7.27.0",
   "author": {
@@ -16,6 +18,7 @@
     "@changesets/cli": "^2.27.1",
     "@types/lodash-es": "^4.17.6",
     "@typescript-eslint/parser": "^5.54.1",
+    "bumpp": "^9.2.1",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-config-standard": "^17.0.0",

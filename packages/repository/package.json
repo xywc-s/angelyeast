@@ -1,9 +1,9 @@
 {
   "name": "@angelyeast/repository",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "通用函数包",
   "scripts": {
-    "build": "rm -rf es && rm -rf lib && vite build"
+    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
   },
   "keywords": [],
   "author": {
@@ -13,16 +13,15 @@
   },
   "type": "module",
   "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "module": "lib/index.js",
+  "types": "types/index.d.ts",
   "files": [
     "lib",
-    "es"
+    "types"
   ],
   "devDependencies": {
-    "@angelyeast/services": "workspace:^1.0.0",
-    "@angelyeast/models": "workspace:^1.0.3",
-    "@angelyeast/types": "workspace:^1.0.0",
+    "@angelyeast/types": "workspace:*",
+    "@angelyeast/model": "workspace:*",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^9.13.0",
     "@xywc-s/utils": "^0.1.10",
@@ -30,13 +29,12 @@
     "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
-    "@angelyeast/services": "^1.0.0",
-    "@angelyeast/models": "^1.0.0",
-    "@angelyeast/types": "^1.0.0",
-    "@vueuse/core": "^9.13.0",
-    "@xywc-s/utils": "^0.1.10",
+    "@angelyeast/types": "workspace:*",
+    "@angelyeast/model": "workspace:*",
+    "@vueuse/core": ">=9.13.0",
+    "@xywc-s/utils": ">=0.1.10",
     "element-plus": "^2.2.36",
-    "lodash-es": "^4.17.21",
-    "vue": "^3.2.*"
+    "lodash-es": ">=4.17.21",
+    "vue": ">=3.2.*"
   }
 }

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue'
-import type { Pager, Sort } from '@angelyeast/types/request'
+import type { Pager, Sort } from '@angelyeast/types'
 
 export const company = {
   id: {

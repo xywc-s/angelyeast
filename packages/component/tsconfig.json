@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "exclude": ["node_modules", "dist", "tsc"],
+  "include": ["src"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "types": ["@types/lodash-es"],
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["types/*"]
+    }
+  }
+}
