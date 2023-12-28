@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/model",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "数据模型包",
   "scripts": {
     "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
