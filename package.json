@@ -4,7 +4,7 @@
   "description": "安琪酵母通用开发工具包",
   "private": "true",
   "scripts": {
-    "pub": "bumpp -r"
+    "bump": "bumpp -r"
   },
   "keywords": [],
   "packageManager": "pnpm@7.27.0",
