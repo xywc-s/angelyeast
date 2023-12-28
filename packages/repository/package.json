@@ -3,7 +3,8 @@
   "version": "1.3.0",
   "description": "通用函数包",
   "scripts": {
-    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
+    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build",
+    "publish": "pnpm publish --public"
   },
   "keywords": [],
   "author": {
