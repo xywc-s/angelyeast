@@ -1,6 +1,6 @@
 {
   "name": "angelyeast",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "安琪前端库",
   "scripts": {
     "build": "rm -rf es && rm -rf lib && vite build"
