@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/repository",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "通用函数包",
   "scripts": {
     "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"

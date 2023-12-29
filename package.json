@@ -1,6 +1,6 @@
 {
   "name": "angelyeast",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "安琪酵母通用开发工具包",
   "scripts": {
     "bump": "bumpp -r",
