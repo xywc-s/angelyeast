@@ -1,12 +1,12 @@
 {
   "name": "angelyeast",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "安琪酵母通用开发工具包",
   "scripts": {
     "bump": "bumpp -r",
     "build": "turbo run build",
-    "prepublish": "pnpm bump",
-    "publish": "turbo run publish"
+    "start": "pnpm bump && turbo run publish",
+    "pub": "pnpm bump && turbo run publish"
   },
   "keywords": [],
   "packageManager": "pnpm@7.27.0",
