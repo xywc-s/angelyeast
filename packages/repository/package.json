@@ -1,11 +1,10 @@
 {
   "name": "@angelyeast/repository",
-  "version": "1.4.9",
+  "version": "1.4.10",
   "description": "通用函数包",
   "private": false,
   "scripts": {
-    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build",
-    "publish": "pnpm publish"
+    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
   },
   "keywords": [],
   "author": {
