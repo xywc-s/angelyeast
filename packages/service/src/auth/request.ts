@@ -1,15 +1,11 @@
 import axios from 'axios'
-import { BaseConfig, common, form } from '../config'
+import { BaseConfig, common, form, getDefaultConfig } from '../config'
 import { reqInterceptor, resInterceptor } from '../interceptors'
 
-const config = BaseConfig.get('Auth') ?? BaseConfig.get('default')
+const baseURL = '/security-server'
+const config = BaseConfig.get('Auth') ?? getDefaultConfig({ ...common, ...form, baseURL })
+const request = axios.create(config)
 
-const request = axios.create({
-  ...common,
-  ...form,
-  ...config,
-  baseURL: config?.baseURL ?? '' + '/security-server'
-})
 request.interceptors.request.use(reqInterceptor.default.success, reqInterceptor.default.error, {
   synchronous: true
 })

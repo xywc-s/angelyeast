@@ -2,13 +2,18 @@
 import type { AxiosRequestConfig } from 'axios'
 import type { ServiceName } from '../index'
 import type { FetchOptions } from '@angelyeast/repository'
-export interface Options<P, T> extends Pick<FetchOptions<P, T>, 'hooks' | 'loading'> {
+export interface Options<P, T> extends FetchOptions<P, T> {
   /**
    * 是否立即获取数据
    */
   immediately: boolean
 }
 export const BaseConfig = new Map<ServiceName | 'default', AxiosRequestConfig>()
+export const getDefaultConfig = (config: AxiosRequestConfig = {}) => {
+  const def = BaseConfig.get('default')
+  const defBaseUrl = def?.baseURL ?? ''
+  return def ? { ...config, ...def, baseURL: defBaseUrl + config?.baseURL } : config
+}
 
 export const ContentTypes = {
   FORM: 'application/x-www-form-urlencoded',

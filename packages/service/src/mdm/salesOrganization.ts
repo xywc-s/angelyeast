@@ -6,7 +6,6 @@ import type { AngelResponse } from '@angelyeast/types/request'
 
 /**
  * 条件搜索
- * @param {*} data
  */
 export const searchByCondition = (data = {}) =>
   request.post<any, AngelResponse<SalesOrganization>>(

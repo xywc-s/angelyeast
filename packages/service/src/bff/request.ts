@@ -1,15 +1,13 @@
 import axios from 'axios'
-import { BaseConfig } from '../config'
+import { BaseConfig, getDefaultConfig } from '../config'
 import BFFResponseIntercertor from '../interceptors/response/bff'
 
-const config = BaseConfig.get('BFF') ?? BaseConfig.get('default')
+const baseURL = '/bff'
+const config = BaseConfig.get('BFF') ?? getDefaultConfig({ timeout: 10000, baseURL })
+const request = axios.create(config)
 
-const request = axios.create({
-  timeout: 10000,
-  ...config,
-  baseURL: config?.baseURL ?? '' + '/bff'
+request.interceptors.response.use(BFFResponseIntercertor.success, BFFResponseIntercertor.error, {
+  synchronous: true
 })
-
-request.interceptors.response.use(BFFResponseIntercertor.success, BFFResponseIntercertor.error)
 
 export default request

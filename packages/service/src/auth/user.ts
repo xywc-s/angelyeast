@@ -1,4 +1,4 @@
-import { merge, assign } from 'lodash-es'
+import { merge } from 'lodash-es'
 import { ref, Ref } from 'vue'
 import { useFetch } from '@angelyeast/repository'
 import { json, Options } from '../config'
@@ -31,22 +31,21 @@ export const findUserList = (data: UserListParams = {}) =>
 
 /** 用户列表 */
 export function useUserList(
-  data: UserListParams,
   options: Partial<Options<UserListParams, LazyReturnType<typeof findUserList>>> = {
+    params: {
+      page: 1,
+      rows: 999999
+    },
     immediately: true
   }
 ): [Ref<User[]>, () => void] {
   /** 用户数据集 */
   const users = ref<User[]>([])
   /** 获取数据 */
-  const _fetch = () => {
-    const defaultParams = {
-      page: 1,
-      rows: 999999
-    }
+  const _fetch = (params: UserListParams = options.params!) => {
     useFetch(findUserList, {
-      params: data ? assign(defaultParams, data) : defaultParams,
-      loading: options?.loading,
+      ...options,
+      params,
       hooks: {
         success: ({ rows }) => {
           users.value = rows
