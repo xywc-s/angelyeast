@@ -12,7 +12,8 @@ export type Permission = {
 
 export type RolePermission = Pick<Permission, 'permissionId' | 'permissionName' | 'permissionValue'>
 
-export type PermissionCode = string | string[]
+export type PermissionCode = string
+export type PermissionCodes = PermissionCode[]
 
 type PermissionChecked = {
   /**
@@ -22,7 +23,7 @@ type PermissionChecked = {
   /**
    * 权限编码
    */
-  code: string
+  code: PermissionCode
 }
 export type UserPermissionCheckResult = {
   /**
