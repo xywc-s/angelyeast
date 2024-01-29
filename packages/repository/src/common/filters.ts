@@ -6,7 +6,7 @@ import type { Ref, UnwrapRef } from 'vue'
  * 查询条件及重置查询
  * @param data 查询条件对象
  */
-export function useFilters<T>(data: T): [Ref<UnwrapRef<T>>, () => void] {
+export function useFilters<T extends object>(data: T): [Ref<UnwrapRef<T>>, () => void] {
   const _clone = cloneDeep(unref(data))
   /**
    * 查询条件对象的ref
