@@ -25,7 +25,6 @@
     "@angelyeast/types": "workspace:*",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^9.13.0",
-    "@xywc-s/utils": "^0.1.10",
     "element-plus": "^2.2.36",
     "lodash-es": "^4.17.21",
     "vxe-table": "^4.5.20"
@@ -35,7 +34,6 @@
     "@angelyeast/types": "workspace:*",
     "vxe-table": ">=4",
     "@vueuse/core": ">=9.13.0",
-    "@xywc-s/utils": ">=0.1.10",
     "element-plus": "^2.2.36",
     "lodash-es": ">=4.17.21",
     "vue": ">=3.2.*"

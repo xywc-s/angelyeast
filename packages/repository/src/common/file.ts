@@ -1,5 +1,5 @@
 import { useBase64 } from '@vueuse/core'
-import { isWorkWechat } from '@xywc-s/utils'
+import { isWorkWechat } from '../utils'
 import { fileServer } from '../config'
 import { isMobile } from './breakpoint'
 import { useNotify } from './notify'
