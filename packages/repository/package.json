@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/repository",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "通用函数包",
   "private": false,
   "scripts": {

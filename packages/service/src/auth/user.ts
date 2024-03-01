@@ -1,9 +1,7 @@
 import { merge } from 'lodash-es'
-import { ref, Ref } from 'vue'
-import { useFetch } from '@angelyeast/repository'
-import { json, Options } from '../config'
+import { json } from '../config'
 import { usePost } from './request'
-import type { AngelResponse, LazyReturnType } from '@angelyeast/types'
+import type { AngelResponse } from '@angelyeast/types'
 import type { User, UserListParams, UserInfo } from '@angelyeast/model'
 
 /**
@@ -25,32 +23,3 @@ export const findUserByCodes = (codes: string[]) =>
  */
 export const findUserList = (data: UserListParams = {}) =>
   usePost<AngelResponse<UserInfo>>('/user/findUserList', merge({ page: 1, rows: 10 }, data))
-
-/** 用户列表 */
-export function useUserList(
-  options: Partial<Options<UserListParams, LazyReturnType<typeof findUserList>>> = {
-    params: {
-      page: 1,
-      rows: 999999
-    },
-    immediately: true
-  }
-): [Ref<UserInfo[]>, () => void] {
-  /** 用户数据集 */
-  const users = ref<UserInfo[]>([])
-  /** 获取数据 */
-  const _fetch = (params: UserListParams = options.params!) => {
-    useFetch(findUserList, {
-      // 默认处理前置
-      onSuccess: ({ rows }) => {
-        users.value = rows
-      },
-      ...options,
-      // 覆写参数后置
-      params
-    })
-  }
-
-  if (options?.immediately) _fetch()
-  return [users, _fetch]
-}
