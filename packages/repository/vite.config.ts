@@ -21,7 +21,6 @@ export default defineConfig({
         'element-plus',
         'lodash-es',
         '@vueuse/core',
-        '@xywc-s/utils',
         'vue',
         'vxe-table',
         '@angelyeast/model',

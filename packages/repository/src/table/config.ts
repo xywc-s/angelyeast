@@ -1,5 +1,5 @@
 import type { AngelResponse } from '@angelyeast/types'
-import { uuid } from '@xywc-s/utils'
+import { uuid } from '../utils'
 import type {
   VxeGridProps,
   VxeGridPropTypes,
