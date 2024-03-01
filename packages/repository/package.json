@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/repository",
-  "version": "1.4.16",
+  "version": "1.5.0",
   "description": "通用函数包",
   "private": false,
   "scripts": {
@@ -21,17 +21,19 @@
     "types"
   ],
   "devDependencies": {
-    "@angelyeast/types": "workspace:*",
     "@angelyeast/model": "workspace:*",
+    "@angelyeast/types": "workspace:*",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^9.13.0",
     "@xywc-s/utils": "^0.1.10",
     "element-plus": "^2.2.36",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "vxe-table": "^4.5.20"
   },
   "peerDependencies": {
-    "@angelyeast/types": "workspace:*",
     "@angelyeast/model": "workspace:*",
+    "@angelyeast/types": "workspace:*",
+    "vxe-table": ">=4",
     "@vueuse/core": ">=9.13.0",
     "@xywc-s/utils": ">=0.1.10",
     "element-plus": "^2.2.36",

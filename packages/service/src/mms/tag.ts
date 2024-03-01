@@ -1,11 +1,11 @@
-import request from './request'
+import { usePost } from './request'
 
-export const findAll = (data) => request.post('/mms/tag/findAll', data)
+export const findAll = (data) => usePost('/tag/findAll', data)
 
-export const findEntity = (data = {}) => request.post('/mms/tag/findEntity', data)
+export const findEntity = (data = {}) => usePost('/tag/findEntity', data)
 
-export const saveEntity = (data = {}) => request.post('/mms/tag/save', data)
+export const saveEntity = (data = {}) => usePost('/tag/save', data)
 
-export const updateEntity = (data = {}) => request.post('/mms/tag/update', data)
+export const updateEntity = (data = {}) => usePost('/tag/update', data)
 
-export const deleteEntity = (data = {}) => request.post('/mms/tag/delete', data)
+export const deleteEntity = (data = {}) => usePost('/tag/delete', data)

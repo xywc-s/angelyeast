@@ -1,12 +1,11 @@
 {
   "name": "angelyeast",
-  "version": "1.4.16",
+  "version": "1.5.0",
   "description": "安琪酵母通用开发工具包",
   "private": true,
   "scripts": {
     "bump": "bumpp -r --all",
     "build": "turbo run build",
-    "start": "pnpm bump && pnpm publish -r",
     "pub": "pnpm bump && pnpm publish -r"
   },
   "keywords": [],
@@ -40,7 +39,8 @@
     "vite": "^4.1.4",
     "vite-plugin-dts": "^2.1.0",
     "vue": "^3.3.11",
-    "vue-eslint-parser": "^9.1.0"
+    "vue-eslint-parser": "^9.1.0",
+    "vue-router": "^4.2.5"
   },
   "importSort": {
     ".js, .jsx": {

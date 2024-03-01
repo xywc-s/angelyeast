@@ -1,6 +1,6 @@
 import Components from './component'
 import type { App, Plugin } from 'vue'
-const INSTALLED_KEY = Symbol('AngelyeastInstalled')
+const INSTALLED_KEY = Symbol('INSTALLED_KEY')
 const makeInstaller = (components: Plugin[] = []) => {
   const install = (app: App, options?: any) => {
     if (app[INSTALLED_KEY]) return

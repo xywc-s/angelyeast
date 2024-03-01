@@ -1,86 +1,30 @@
-import request from './request'
+import { usePost } from './request'
+import { json } from '../config'
 
-const headers = {
-  'Content-Type': 'application/json'
-}
-export function findAll(data) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/findAll',
-    data
-  })
-}
+export const findAll = (data) => usePost('/materialGroupingAttributeConfig/findAll', data)
 
-export function findEntity(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/findEntity',
-    data
-  })
-}
+export const findEntity = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/findEntity', data)
 
-export function saveEntity(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/save',
-    data
-  })
-}
+export const saveEntity = (data = {}) => usePost('/materialGroupingAttributeConfig/save', data)
 
-export function updateEntity(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/update',
-    data
-  })
-}
+export const updateEntity = (data = {}) => usePost('/materialGroupingAttributeConfig/update', data)
 
-export function deleteEntity(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/delete',
-    data
-  })
-}
-export function searchByCondition(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/searchByCondition',
-    data,
-    headers
-  })
-}
+export const deleteEntity = (data = {}) => usePost('/materialGroupingAttributeConfig/delete', data)
+export const searchByCondition = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/searchByCondition', data, json)
 
-export function getGroupTypes(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/getType',
-    data,
-    headers
-  })
-}
+export const getGroupTypes = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/getType', data, json)
 
-export function batchUpdate(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/batchUpdateConfig',
-    data,
-    headers
-  })
-}
+export const batchUpdate = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/batchUpdateConfig', data, json)
 
-export function getAllAttributes(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/getAllAttributes',
-    data,
-    headers
-  })
-}
+export const getAllAttributes = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/getAllAttributes', data, json)
 
-export function getGroupAttributes(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/getAttributes',
-    data,
-    headers
-  })
-}
+export const getGroupAttributes = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/getAttributes', data, json)
 
-export function getTreeData(data = {}) {
-  return request({
-    url: '/mms/materialGroupingAttributeConfig/getGroupingData',
-    data,
-    headers
-  })
-}
+export const getTreeData = (data = {}) =>
+  usePost('/materialGroupingAttributeConfig/getGroupingData', data, json)

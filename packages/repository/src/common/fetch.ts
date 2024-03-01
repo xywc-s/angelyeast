@@ -1,14 +1,19 @@
 import { ElMessage } from 'element-plus'
 import { isRef } from 'vue'
+import { isFunction } from 'lodash-es'
 import type { Ref } from 'vue'
 import type { AngelResponse } from '@angelyeast/types'
+
+interface LoadingInstance {
+  close: () => void
+}
 
 /**
  * 接口调用处理函数
  * @param fn 接口函数
  * @param options 选项参数
  */
-export function useFetch<T, P>(fn: API<P, T>, options?: Partial<FetchOptions<P, T>>) {
+export function useFetch<P = any, T = any>(fn: API<P, T>, options?: Partial<FetchOptions<P, T>>) {
   options = Object.assign({ autoNotify: true }, options)
   options.loading && checkAndToggleLoading(options.loading, true)
   fn(options.params as P)
@@ -16,45 +21,44 @@ export function useFetch<T, P>(fn: API<P, T>, options?: Partial<FetchOptions<P, 
       const { success, message } = res as AngelResponse
       if (success) {
         options?.autoNotify && message && ElMessage.success(message)
-        if (options?.hooks?.success) options?.hooks.success(res)
+        if (options?.onSuccess) options?.onSuccess(res)
       } else {
         message && ElMessage.error(message)
-        if (options?.hooks?.error) options?.hooks.error(res)
+        if (options?.onError) options?.onError(res)
       }
     })
     .catch((error) => {
-      if (options?.hooks?.error) options?.hooks.error(error)
+      if (options?.onError) options?.onError(error)
     })
     .finally(() => {
       options?.loading && checkAndToggleLoading(options.loading, false)
-      if (options?.hooks?.finally) options?.hooks.finally()
+      if (options?.onFinally) options?.onFinally()
     })
 }
 
 function checkAndToggleLoading(loading: FetchLoading, value: boolean) {
   if (isRef<boolean>(loading)) loading.value = value
-  else loading(value)
+  else if (isFunction(loading)) loading(value)
+  else loading.close()
 }
 
 export type API<P, T> = (p: P) => Promise<T>
-export type FetchLoading = Ref<boolean> | ((b: boolean) => void)
-export type FetchOptions<P, T> = {
+export type FetchLoading = Ref<boolean> | ((b: boolean) => void) | LoadingInstance
+export interface FetchOptions<P, T> {
   /** 接口参数 */
   params: P
   /** loading状态 */
   loading: FetchLoading
-  /** 钩子 */
-  hooks: Partial<FetchOptionHooks<P, T>>
   /**
    * 接口返回成功时, 是否自动弹出通知消息, 内容为接口返回的message
    * @description  默认返回成功提示, 设置为false可取消提示, 实际场景中绝大部分查询成功并不需要提示
+   * @default true
    */
   autoNotify: boolean
-}
-
-export interface FetchOptionHooks<P, T> {
-  before: (p: P) => any
-  success: (response: T) => void
-  error: (error: any) => void
-  finally: () => void
+  /** 成功响应时 */
+  onSuccess: (response: T) => void
+  /** 失败响应时 */
+  onError: (error: any) => void
+  /** 接口调用后 */
+  onFinally: () => void
 }

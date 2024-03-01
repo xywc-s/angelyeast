@@ -1,6 +1,6 @@
 export declare interface AngelResponse<D = any, O = any> {
   success: boolean
-  message: string | null
+  message: string
   rows: D[]
   object: O
   total: number

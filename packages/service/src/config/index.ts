@@ -2,10 +2,22 @@
 import type { AxiosRequestConfig } from 'axios'
 import type { ServiceName } from '../index'
 import type { FetchOptions } from '@angelyeast/repository'
-export interface Options<P, T> extends FetchOptions<P, T> {
+export interface AngelMicroServeRequestConfig {
   /**
-   * 是否立即获取数据
+   * 是否启用微服务鉴权
+   * @default true
    */
+  serveAuth?: boolean
+  /**
+   * 是否全量返回axios的响应
+   * @description 由于微服务响应码全部是200, 状态和消息全部自定义, 所以默认只返回response.data
+   * @default false
+   */
+  fullReturn?: boolean
+}
+
+export interface Options<P, T> extends FetchOptions<P, T> {
+  /** 是否立即获取数据 */
   immediately: boolean
 }
 export const BaseConfig = new Map<ServiceName | 'default', AxiosRequestConfig>()
@@ -22,10 +34,6 @@ export const ContentTypes = {
   DOWNLOAD: 'application/octet-stream'
 }
 
-export const common: AxiosRequestConfig = {
-  timeout: 20000,
-  withCredentials: false
-}
 export const form: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypes.FORM
@@ -43,4 +51,10 @@ export const json: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypes.JSON
   }
+}
+export const common: AxiosRequestConfig & AngelMicroServeRequestConfig = {
+  ...form,
+  serveAuth: true,
+  timeout: 20000,
+  withCredentials: false
 }

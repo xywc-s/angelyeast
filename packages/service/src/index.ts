@@ -1,8 +1,14 @@
 import { BaseConfig } from './config'
+// 通用函数
+export * from './common'
+// 微服务
 import * as Auth from './auth'
 import * as BFF from './bff'
 import * as MDM from './mdm'
 import * as MMS from './mms'
+import * as Market from './market'
+import * as OPEN from './open'
+
 import type { AxiosRequestConfig } from 'axios'
 
 const ServiceMap = {
@@ -12,7 +18,11 @@ const ServiceMap = {
   /** 主数据库 */
   MDM,
   /** 物料管理系统 */
-  MMS
+  MMS,
+  /** 营销 */
+  Market,
+  /** 开放服务 */
+  OPEN
 }
 export type Services = Readonly<typeof ServiceMap>
 export type ServiceName = keyof Services

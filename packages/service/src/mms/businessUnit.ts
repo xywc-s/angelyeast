@@ -1,22 +1,7 @@
-import request from './request'
+import { usePost } from './request'
 
-export function findAll(data) {
-  return request({
-    url: '/mms/businessUnit/findAll',
-    data
-  })
-}
+export const findAll = (data) => usePost('/businessUnit/findAll', data)
 
-export function findEntity(data = {}) {
-  return request({
-    url: '/mms/businessUnit/findEntity',
-    data
-  })
-}
+export const findEntity = (data = {}) => usePost('/businessUnit/findEntity', data)
 
-export function update(data) {
-  return request({
-    url: '/mms/businessUnit/update',
-    data
-  })
-}
+export const update = (data) => usePost('/businessUnit/update', data)

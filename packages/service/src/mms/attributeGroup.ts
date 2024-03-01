@@ -1,24 +1,22 @@
 import { json } from '../config'
-import request from './request'
+import { usePost } from './request'
 
-export const findAll = (data) => request.post('/mms/attributeGroup/findAll', data)
+export const findAll = (data) => usePost('/attributeGroup/findAll', data)
 
-export const searchByCondition = (data) =>
-  request.post('/mms/attributeGroup/searchByCondition', data, json)
+export const searchByCondition = (data) => usePost('/attributeGroup/searchByCondition', data, json)
 
-export const findEntity = (data = {}) => request.post('/mms/attributeGroup/findEntity', data)
+export const findEntity = (data = {}) => usePost('/attributeGroup/findEntity', data)
 
-export const saveEntity = (data = {}) => request.post('/mms/attributeGroup/save', data)
+export const saveEntity = (data = {}) => usePost('/attributeGroup/save', data)
 
-export const updateEntity = (data = {}) => request.post('/mms/attributeGroup/update', data)
+export const updateEntity = (data = {}) => usePost('/attributeGroup/update', data)
 
-export const deleteEntities = (data = {}) =>
-  request.post('/mms/attributeGroup/deleteGroups', data, json)
+export const deleteEntities = (data = {}) => usePost('/attributeGroup/deleteGroups', data, json)
 
-export const getStatusList = (data = {}) => request.post('/mms/attributeGroup/getStatus', data)
+export const getStatusList = (data = {}) => usePost('/attributeGroup/getStatus', data)
 
 export const relateAttrs = (data = {}) =>
-  request.post('/mms/attributeGroupAttributeRelation/batchUpdateRelations', data, json)
+  usePost('/attributeGroupAttributeRelation/batchUpdateRelations', data, json)
 
 export const findRelations = (data = {}) =>
-  request.post('/mms/attributeGroupAttributeRelation/findAll', data)
+  usePost('/attributeGroupAttributeRelation/findAll', data)

@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules", "dist", "tsc"],
+  "exclude": ["node_modules", "dist", "tsc", "es", "lib"],
   "compilerOptions": {
     "strict": true,
     "module": "ESNext",

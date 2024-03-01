@@ -1,6 +1,5 @@
 import { json } from '../config'
-import request from './request'
+import { usePost } from './request'
 
-export const findEntity = (data) => request.post('/mms/certificate/findEntity', data)
-export const searchByCondition = (data) =>
-  request.post('/mms/certificate/searchByCondition', data, json)
+export const findEntity = (data) => usePost('/certificate/findEntity', data)
+export const searchByCondition = (data) => usePost('/certificate/searchByCondition', data, json)

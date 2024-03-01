@@ -1,35 +1,25 @@
 import { json } from '../config'
-import request from './request'
+import { usePost } from './request'
 
-export const findAll = (data) => request.post('/mms/supplier/findAll', data)
+export const findAll = (data) => usePost('/supplier/findAll', data)
 
-export const findEntity = (data = {}) => request.post('/mms/supplier/findEntity', data)
+export const findEntity = (data = {}) => usePost('/supplier/findEntity', data)
 
-export const saveEntity = (data = {}) => request.post('/mms/supplier/save', data)
+export const saveEntity = (data = {}) => usePost('/supplier/save', data)
 
-export const updateEntity = (data = {}) => request.post('/mms/supplier/update', data)
+export const updateEntity = (data = {}) => usePost('/supplier/update', data)
 
-export const deleteEntity = (data = {}) => request.post('/mms/supplier/delete', data)
+export const deleteEntity = (data = {}) => usePost('/supplier/delete', data)
 
-export const searchCompany = (data = {}) => request.post('/mms/supplier/searchCompany', data, json)
+export const searchCompany = (data = {}) => usePost('/supplier/searchCompany', data, json)
 
-export const searchSupplier = (data = {}) =>
-  request.post('/mms/supplier/searchSupplier', data, json)
+export const searchSupplier = (data = {}) => usePost('/supplier/searchSupplier', data, json)
 
 export const findMembersBySupplierId = (supplierId) =>
-  request.post(
-    '/mms/supplier/findMembersBySupplierId',
-    {
-      supplierId
-    },
-    json
-  )
+  usePost('/supplier/findMembersBySupplierId', { supplierId }, json)
 
-export const searchByCondition = (data) =>
-  request.post('/mms/supplier/searchByCondition', data, json)
+export const searchByCondition = (data) => usePost('/supplier/searchByCondition', data, json)
 
-export const findSupplierAttachment = (data) =>
-  request.post('/mms/supplierAttachmentRelation/findAll', data)
+export const findSupplierAttachment = (data) => usePost('/supplierAttachmentRelation/findAll', data)
 
-export const syncSupplierFromSAP = (data) =>
-  request.post('/mms/supplier/syncSupplierFromSAP', data, json)
+export const syncSupplierFromSAP = (data) => usePost('/supplier/syncSupplierFromSAP', data, json)

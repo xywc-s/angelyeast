@@ -1,39 +1,28 @@
 import { assign } from 'lodash-es'
 import { json } from '../config'
-import request from './request'
-import type { AngelResponse } from '@angelyeast/types/request'
+import { getRequestInstance, usePost } from './request'
+import { generateBaseApi } from '../common/generateBaseApi'
+import type { AngelResponse } from '@angelyeast/types'
+
+const {
+  findAll: getAll,
+  findEntity,
+  create,
+  remove,
+  update
+} = generateBaseApi(getRequestInstance, 'salesOrder')
+
+export { findEntity, create, remove, update }
 
 /**
  * 分页查询所有
+ * @default {page: 1, rows: 10}
  */
-export const findAll = (data = {}) =>
-  request.post('/salesOrder/findAll', assign({ page: 1, rows: 10 }, data))
-
-/**
- * 查询单个
- */
-export const findEntity = (data = {}) => request.post('/salesOrder/findEntity', data)
-
-/**
- * 创建
- */
-export const create = (data = {}) => request.post('/salesOrder/save', data)
-
-/**
- * 更新
- */
-export const update = (data = {}) => request.post('/salesOrder/update', data)
-
-/**
- * 删除
- */
-export const remove = (data = {}) => request.post('/salesOrder/delete', data)
+export const findAll = (...args: Parameters<typeof getAll>) =>
+  getAll(assign({ page: 1, rows: 10 }, args[0]), args[1])
 
 /**
  * 从SAP查询销售订单和发货单
  */
-type SalesOrderAndDeliveryOrderQueryData = {
-  salesOrderCode: string
-}
-export const querySalesOrderAndDeliveryOrderFromSap = (data: SalesOrderAndDeliveryOrderQueryData) =>
-  request.post<any, AngelResponse>('/salesOrder/querySalesOrderAndDeliveryOrderFromSap', data, json)
+export const querySalesOrderAndDeliveryOrderFromSap = (data: { salesOrderCode: string }) =>
+  usePost<AngelResponse>('/salesOrder/querySalesOrderAndDeliveryOrderFromSap', data, json)

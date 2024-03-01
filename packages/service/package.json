@@ -1,8 +1,8 @@
 {
   "name": "@angelyeast/service",
-  "version": "1.4.16",
+  "version": "1.5.0",
   "private": false,
-  "description": "安琪服务包",
+  "description": "安琪微服务包",
   "scripts": {
     "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
   },

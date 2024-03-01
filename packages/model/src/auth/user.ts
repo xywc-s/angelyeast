@@ -56,7 +56,7 @@ export const user = {
   }
 }
 
-export type User = ExtractPropTypes<typeof user>
+export type UserInfo = ExtractPropTypes<typeof user>
 export type UserFuzzySearchParams = {
   /**
    * 模糊匹配关键字
@@ -64,3 +64,28 @@ export type UserFuzzySearchParams = {
   data: string
 }
 export type UserListParams = Partial<Pager & Sort & UserFuzzySearchParams>
+
+export interface User {
+  code: string
+  deleted: string
+  dingTalkJson?: any
+  email: string
+  gender: string
+  id: string
+  insertDate: string
+  json?: any
+  loginDate: string
+  name: string
+  namePhoneticFull: string
+  namePhoneticShort: string
+  /** 企业微信id */
+  outerId: string
+  password?: any
+  phone: string
+  position: string
+  qq?: any
+  status: string
+  updateDate: string
+  username: string
+  weChatJson: string
+}

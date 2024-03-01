@@ -1,45 +1,27 @@
 import { assign } from 'lodash-es'
-import { json } from '../config'
-import request from './request'
-import type { Trade, TradeListParams } from '@angelyeast/models/es/market/trade'
-import type { AngelResponse } from '@angelyeast/types/request'
+import { getRequestInstance } from './request'
+import { generateBaseApi } from '../common/generateBaseApi'
+import type { Trade, TradeListParams } from '@angelyeast/model'
+
+export const {
+  searchByCondition: search,
+  findAll: getAll,
+  findEntity,
+  create,
+  remove,
+  update
+} = generateBaseApi<Trade>(getRequestInstance, 'trade')
 
 /**
  * 条件搜索
+ * @default {page: 1, rows: 10}
  */
-export const searchByCondition = (data: TradeListParams = {}) =>
-  request.post<any, AngelResponse<Trade>>(
-    '/trade/searchByCondition',
-    assign({ page: 1, rows: 10 }, data),
-    json
-  )
+export const searchByCondition = (...args: Parameters<typeof search<TradeListParams>>) =>
+  search(assign({ page: 1, rows: 10 }, args[0]), args[1])
 
 /**
  * 分页查询所有
+ * @default {page: 1, rows: 10}
  */
-export const findAll = (data: TradeListParams = {}) =>
-  request.post<any, AngelResponse<Trade>, TradeListParams>(
-    '/trade/findAll',
-    assign({ page: 1, rows: 10 }, data)
-  )
-
-/**
- * 查询单个
- */
-export const findEntity = (data = {}) =>
-  request.post<any, AngelResponse<any, Trade>>('/trade/findEntity', data)
-
-/**
- * 创建
- */
-export const create = (data = {}) => request.post<any, AngelResponse<Trade>>('/trade/save', data)
-
-/**
- * 更新
- */
-export const update = (data = {}) => request.post<any, AngelResponse<Trade>>('/trade/update', data)
-
-/**
- * 删除
- */
-export const remove = (data = {}) => request.post<any, AngelResponse<Trade>>('/trade/delete', data)
+export const findAll = (...args: Parameters<typeof getAll<TradeListParams>>) =>
+  getAll(assign({ page: 1, rows: 10 }, args[0]), args[1])

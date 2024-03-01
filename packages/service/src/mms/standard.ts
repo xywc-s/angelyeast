@@ -1,42 +1,37 @@
 import { json } from '../config'
-import request from './request'
-export const findAll = (data) => request.post('/mms/standard/findAll', data)
+import { usePost, useGet } from './request'
+export const findAll = (data) => usePost('/standard/findAll', data)
 
-export const findEntity = (data = {}) => request.post('/mms/standard/findEntity', data)
+export const findEntity = (data = {}) => usePost('/standard/findEntity', data)
 
-export const saveEntity = (data = {}) => request.post('/mms/standard/save', data)
+export const saveEntity = (data = {}) => usePost('/standard/save', data)
 
-export const updateEntity = (data = {}) => request.post('/mms/standard/update', data)
+export const updateEntity = (data = {}) => usePost('/standard/update', data)
 
-export const deleteEntity = (data = {}) => request.post('/mms/standard/delete', data)
+export const deleteEntity = (data = {}) => usePost('/standard/delete', data)
 
-export const getEnum = (data = {}) => request.post('/mms/standard/getEnum', data)
+export const getEnum = (data = {}) => usePost('/standard/getEnum', data)
 
-export const searchStandard = (data = {}) =>
-  request.post('/mms/standard/searchStandard', data, json)
+export const searchStandard = (data = {}) => usePost('/standard/searchStandard', data, json)
 
-export const searchByCondition = (data = {}) =>
-  request.post('/mms/standard/searchByCondition', data, json)
+export const searchByCondition = (data = {}) => usePost('/standard/searchByCondition', data, json)
 
 export const findStandardAttachment = (data = {}) =>
-  request.post('/mms/standardAttachmentRelation/findAll', data)
+  usePost('/standardAttachmentRelation/findAll', data)
 
 export const findStandardMaterial = (data = {}) =>
-  request.post('/mms/materialStandardRelation/findAll', data)
+  usePost('/materialStandardRelation/findAll', data)
 
-export const saveNewStandard = (data = {}) =>
-  request.post('/mms/standard/saveNewStandard', data, json)
+export const saveNewStandard = (data = {}) => usePost('/standard/saveNewStandard', data, json)
 
-export const deleteStandards = (data = {}) =>
-  request.post('/mms/standard/deleteStandards', data, json)
+export const deleteStandards = (data = {}) => usePost('/standard/deleteStandards', data, json)
 
 export const exportStandardDataByCondition = (params = {}) =>
-  request.get('/mms/standard/exportStandardDataByCondition', { params, responseType: 'blob' })
+  useGet('/standard/exportStandardDataByCondition', { params, responseType: 'blob' })
 
-export const sendNotify = (data = {}) => request.post('/mms/standard/sendNotify', data, json)
+export const sendNotify = (data = {}) => usePost('/standard/sendNotify', data, json)
 
-export const batchAddAscription = (data = {}) =>
-  request.post('/mms/standard/batchAddAscription', data, json)
+export const batchAddAscription = (data = {}) => usePost('/standard/batchAddAscription', data, json)
 
 export const batchRemoveAscription = (data = {}) =>
-  request.post('/mms/standard/batchRemoveAscription', data, json)
+  usePost('/standard/batchRemoveAscription', data, json)

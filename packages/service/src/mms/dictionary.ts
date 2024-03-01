@@ -1,15 +1,15 @@
 import { json } from '../config'
-import request from './request'
+import { usePost } from './request'
 
-export const findAll = (data) => request.post('/mms/dictionary/findAll', data)
+export const findAll = (data) => usePost('/dictionary/findAll', data)
 
-export const findEntity = (data = {}) => request.post('/mms/dictionary/findEntity', data)
+export const findEntity = (data = {}) => usePost('/dictionary/findEntity', data)
 
-export const saveEntity = (data = {}) => request.post('/mms/dictionary/save', data)
+export const saveEntity = (data = {}) => usePost('/dictionary/save', data)
 
-export const updateEntity = (data = {}) => request.post('/mms/dictionary/update', data)
+export const updateEntity = (data = {}) => usePost('/dictionary/update', data)
 
-export const deleteEntity = (data = {}) => request.post('/mms/dictionary/delete', data)
+export const deleteEntity = (data = {}) => usePost('/dictionary/delete', data)
 
 export const findChildrenByCode = (data = {}) =>
-  request.post('/mms/dictionary/findChildrenByCode', data, json)
+  usePost('/dictionary/findChildrenByCode', data, json)

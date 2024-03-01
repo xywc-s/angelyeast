@@ -23,6 +23,7 @@ export default defineConfig({
         '@vueuse/core',
         '@xywc-s/utils',
         'vue',
+        'vxe-table',
         '@angelyeast/model',
         '@angelyeast/types'
       ],
