@@ -38,13 +38,6 @@ export const form: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypes.FORM
   }
-  // FIXME 新版axios将会根据Content-Type自动处理参数为urlencoded格式
-  // paramsSerializer: {
-  //   serialize: (params, options) => {
-  //     console.log({ params, options })
-  //     return qs.stringify(params)
-  //   }
-  // }
 }
 
 export const json: AxiosRequestConfig = {
