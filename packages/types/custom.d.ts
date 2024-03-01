@@ -1,6 +1,4 @@
-export declare type Lazy<T> = () => Promise<T>
-export declare type LazyReturnType<T extends (...args: any) => Promise<any>> = T extends (
-  ...args: any
-) => Promise<infer R>
+export declare type Lazy = (...args: any) => Promise<any>
+export declare type LazyReturnType<T extends Lazy> = T extends (...args: any) => Promise<infer R>
   ? R
   : Promise<any>

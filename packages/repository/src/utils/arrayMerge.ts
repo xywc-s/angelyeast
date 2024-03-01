@@ -8,8 +8,8 @@ export function arrayMerge<T extends Record<keyof T, T[keyof T]>>(
   key: keyof T,
   ...arrays: Array<T[]>
 ): T[] {
-  const array = []
-  const groups = new Map() // key => [pos in array, [array, of, objects, with, the, same, key]]
+  const array: T[] = []
+  const groups = new Map()
 
   for (let i = 0; i < arrays.length; ++i) {
     for (let j = 0; j < arrays[i].length; ++j) {
