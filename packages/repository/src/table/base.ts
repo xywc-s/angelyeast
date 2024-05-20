@@ -132,10 +132,10 @@ export class BaseTable<D> {
     }
     // 将过滤器和附件参数设置为接口参数
     assign(params, get(this._filters), data ?? {})
-    if (this._onQuery?.onBefore) {
+    /* if (this._onQuery?.onBefore) {
       const refactoryParams = this._onQuery.onBefore(params)
       if (refactoryParams) params = refactoryParams
-    }
+    } */
 
     this._onQuery
       .fn(params)
