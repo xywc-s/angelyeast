@@ -147,6 +147,7 @@ export class BaseTable<D> {
         } else {
           const { rows, total } = result
           this._options.data = rows
+          this._options.pageConfig!.currentPage = params[this._options.pagerConfig.pageKey]
           this._options.pagerConfig!.total = total
         }
       })
