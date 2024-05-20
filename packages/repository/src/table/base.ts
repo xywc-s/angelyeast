@@ -124,13 +124,11 @@ export class BaseTable<D> {
     if (!isFunction(this._onQuery.fn)) throw new Error('查询接口函数必须是一个Promise函数')
 
     this._options.loading = true
-    let params = {}
+    let params = { dataKey: 'rows' }
     // 如果配置了分页器, 将分页参数设置为接口参数
     if (this._options.pagerConfig?.enabled) {
-      params = {
-        [this._options.pagerConfig.pageKey as string]: this._options.pagerConfig.currentPage,
-        [this._options.pagerConfig.pageSizeKey as string]: this._options.pagerConfig.pageSize
-      }
+      params[this._options.pagerConfig.pageKey as string] = this._options.pagerConfig.currentPage
+      params[this._options.pagerConfig.pageSizeKey as string] = this._options.pagerConfig.pageSize
     }
     // 将过滤器和附件参数设置为接口参数
     assign(params, get(this._filters), data ?? {})
@@ -145,10 +143,10 @@ export class BaseTable<D> {
         if (this._onQuery?.onSuccess) {
           this._onQuery.onSuccess(result, this._options)
         } else {
-          const { rows, total } = result
-          this._options.data = rows
-          this._options.pageConfig!.currentPage = params[this._options.pagerConfig.pageKey]
-          this._options.pagerConfig!.total = total
+          this._options.data = result[params['dataKey']]
+          this._options.pagerConfig!.currentPage =
+            params[this._options.pagerConfig!.pageKey as string]
+          this._options.pagerConfig!.total = result?.total
         }
       })
       .catch((reason) => {
