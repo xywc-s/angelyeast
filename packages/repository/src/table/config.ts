@@ -1,4 +1,3 @@
-import type { AngelResponse } from '@angelyeast/types'
 import { uuid } from '../utils'
 import type {
   VxeGridProps,
@@ -10,15 +9,8 @@ import type {
   VxeModalProps
 } from 'vxe-table'
 
-export type ListDataApiType<D = any, P extends any[] = any[]> = (
-  ...args: P
-) => Promise<AngelResponse<D, any>>
-export type ObjectDataApiType<D = any, P extends any[] = any[]> = (
-  ...args: P
-) => Promise<AngelResponse<any, D>>
-
 /** 表格API接口配置参数 */
-export interface ApiOptions<Context, ResponseData, Params extends any[]> {
+export interface ApiOptions<Context, ResponseData, Params extends unknown[]> {
   /**
    * 调用前钩子
    * @return 重构后将传递的接口参数或void
