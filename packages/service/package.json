@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/service",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "private": false,
   "description": "安琪微服务包",
   "scripts": {
