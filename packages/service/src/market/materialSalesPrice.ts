@@ -1,6 +1,5 @@
 import { assign } from 'lodash-es'
-import { getRequestInstance } from './request'
-import { generateBaseApi } from '../common/generateBaseApi'
+import { getRequestInstance, generateBaseApi } from '../common'
 import type { MaterialSalesPrice, MaterialSalesPriceListParams } from '@angelyeast/model'
 
 const {
@@ -10,7 +9,9 @@ const {
   create,
   remove,
   update
-} = generateBaseApi<MaterialSalesPrice>(getRequestInstance, 'materialSalesPrice')
+} = generateBaseApi<MaterialSalesPrice>('materialSalesPrice', {
+  instance: () => getRequestInstance('Market')
+})
 
 /**
  * 条件搜索

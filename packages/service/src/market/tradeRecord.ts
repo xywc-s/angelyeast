@@ -1,6 +1,5 @@
 import { assign } from 'lodash-es'
-import { getRequestInstance } from './request'
-import { generateBaseApi } from '../common/generateBaseApi'
+import { generateBaseApi, getRequestInstance } from '../common'
 import type { TradeRecord, TradeRecordListParams } from '@angelyeast/model'
 
 export const {
@@ -10,7 +9,9 @@ export const {
   create,
   remove,
   update
-} = generateBaseApi<TradeRecord>(getRequestInstance, 'tradeRecord')
+} = generateBaseApi<TradeRecord>('tradeRecord', {
+  instance: () => getRequestInstance('Market')
+})
 
 /**
  * 分页查询所有

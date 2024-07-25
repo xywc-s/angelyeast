@@ -4,13 +4,18 @@ import DefaultResponse from './response/default'
 import AngelResponse from './response/angel'
 import BFFResponse from './response/bff'
 
-export const reqInterceptor = {
+export const requestInterceptor = {
   default: DefaultRequest,
   angel: AngelRequest
 }
 
-export const resInterceptor = {
+export const responseInterceptor = {
   default: DefaultResponse,
   angel: AngelResponse,
   bff: BFFResponse
+}
+
+export default {
+  request: requestInterceptor,
+  response: responseInterceptor
 }

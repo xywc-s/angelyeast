@@ -1,53 +1,12 @@
 // import qs from 'qs'
-import type { AxiosRequestConfig } from 'axios'
-import type { ServiceName } from '../index'
-import type { FetchOptions } from '@angelyeast/repository'
-export interface AngelMicroServeRequestConfig {
-  /**
-   * 是否启用微服务鉴权
-   * @default true
-   */
-  serveAuth?: boolean
-  /**
-   * 是否全量返回axios的响应
-   * @description 由于微服务响应码全部是200, 状态和消息全部自定义, 所以默认只返回response.data
-   * @default false
-   */
-  fullReturn?: boolean
-}
+import type { ServiceName } from './service'
+import type { AngelMicroServeRequestConfig } from './request'
+export * from './service'
+export * from './request'
 
-export interface Options<P, T> extends FetchOptions<P, T> {
-  /** 是否立即获取数据 */
-  immediately: boolean
-}
-export const BaseConfig = new Map<ServiceName | 'default', AxiosRequestConfig>()
-export const getDefaultConfig = (config: AxiosRequestConfig = {}) => {
-  const def = BaseConfig.get('default')
-  const defBaseUrl = def?.baseURL ?? ''
-  return def ? { ...config, ...def, baseURL: defBaseUrl + config?.baseURL } : config
-}
+export const BaseConfig = new Map<ServiceName | 'default', AngelMicroServeRequestConfig>()
 
-export const ContentTypes = {
-  FORM: 'application/x-www-form-urlencoded',
-  JSON: 'application/json',
-  UPLOAD: 'multipart/form-data',
-  DOWNLOAD: 'application/octet-stream'
-}
-
-export const form: AxiosRequestConfig = {
-  headers: {
-    'Content-Type': ContentTypes.FORM
-  }
-}
-
-export const json: AxiosRequestConfig = {
-  headers: {
-    'Content-Type': ContentTypes.JSON
-  }
-}
-export const common: AxiosRequestConfig & AngelMicroServeRequestConfig = {
-  ...form,
-  serveAuth: true,
-  timeout: 20000,
-  withCredentials: false
+export const Errors = {
+  NoDefaultConfig: 'Angel Micro Service: 微服务默认配置未设置!',
+  NoDefaultConfigOrInstance: 'Generate Base Api: default配置缺失, 或者没有指定请求实例!'
 }

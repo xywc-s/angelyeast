@@ -1,20 +1,15 @@
-import axios from 'axios'
-import { BaseConfig, getDefaultConfig } from '../config'
+import { getRequestInstance as getReqInstance } from '../common/instance'
 import BFFResponseIntercertor from '../interceptors/response/bff'
-import type { AxiosRequestConfig, AxiosInstance } from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 
-let request: AxiosInstance
-const baseURL = '/bff'
 const { success, error } = BFFResponseIntercertor
 
 function getRequestInstance() {
-  if (request) return request
-  const config = BaseConfig.get('BFF') ?? getDefaultConfig({ timeout: 10000, baseURL })
-  request = axios.create(config)
-  request.interceptors.response.use(success, error, {
+  const instance = getReqInstance('BFF')
+  instance.interceptors.response.use(success, error, {
     synchronous: true
   })
-  return request
+  return instance
 }
 
 export function usePost<R = any, D = any>(url: string, data: D, config?: AxiosRequestConfig<D>) {

@@ -1,32 +1,11 @@
-import { BaseConfig } from './config'
-// 通用函数
-export * from './common'
-// 微服务
-import * as Auth from './auth'
-import * as BFF from './bff'
-import * as MDM from './mdm'
-import * as MMS from './mms'
-import * as Market from './market'
-import * as OPEN from './open'
-
+import { BaseConfig, ServiceMap, type Services, type ServiceName } from './config'
 import type { AxiosRequestConfig } from 'axios'
 
-const ServiceMap = {
-  BFF,
-  /** 鉴权中心 */
-  Auth,
-  /** 主数据库 */
-  MDM,
-  /** 物料管理系统 */
-  MMS,
-  /** 营销 */
-  Market,
-  /** 开放服务 */
-  OPEN
-}
-export type Services = Readonly<typeof ServiceMap>
-export type ServiceName = keyof Services
-
+// 通用函数
+export { RequestInstance, generateBaseApi, useGet, usePost, useRequest } from './common'
+import Interceptors from './interceptors'
+export { ContentTypes, json as JsonHeaders } from './config'
+export { Interceptors }
 /**
  * 设置所有服务的默认配置, 若指定服务名称, 则仅设置指定的服务配置
  */

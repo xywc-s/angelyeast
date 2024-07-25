@@ -13,7 +13,6 @@ interface OnQuery extends Lazy {}
 export class BaseTable<D> {
   _options: BaseOptions<D>
   _filters: Ref
-  // _onQuery: Partial<QueryHandler<D>>
   _onQuery?: OnQuery
   _queryOptions?: QueryOptions
 
