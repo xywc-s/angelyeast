@@ -1,5 +1,5 @@
 import { set } from 'lodash-es'
-import { useBase64 } from '@vueuse/core'
+import { encode } from 'js-base64'
 import { isWorkWechat } from '../utils'
 import { isMobile } from './breakpoint'
 import { useNotify } from './notify'
@@ -30,11 +30,10 @@ export const previewFile = (url: string) => {
   if (isWorkWechat() && isMobile()) {
     window.open(url)
   } else {
-    const { base64 } = useBase64(url)
     const path =
       fileServer.filePreviewDomain +
       '/onlinePreview?url=' +
-      encodeURIComponent(base64.value) +
+      encodeURIComponent(encode(url, true)) +
       '&officePreviewType=pdf'
     window.open(path)
   }

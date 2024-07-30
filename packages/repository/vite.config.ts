@@ -20,6 +20,7 @@ export default defineConfig({
         'axios',
         // 'element-plus',
         'lodash-es',
+        'js-base64',
         '@vueuse/core',
         'vue',
         'vxe-table',
