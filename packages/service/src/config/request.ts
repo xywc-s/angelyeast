@@ -42,5 +42,4 @@ export const common: AngelMicroServeRequestConfig = {
   ...form,
   serveAuth: true,
   timeout: 20 * 1000
-  // adapter: 'fetch'
 }
