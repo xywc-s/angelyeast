@@ -10,24 +10,22 @@ export interface RequestInstanceConfig extends AngelMicroServeRequestConfig {
 }
 export const instanceMap: Map<ServiceName | 'default', RequestInstance> = new Map()
 export class RequestInstance extends Axios {
-  // instance: AxiosInstance
-  #serverName: ServiceName | 'default'
+  #serverName: ServiceName | 'default' = 'default'
   constructor(config?: RequestInstanceConfig) {
     super({ ...common, ...(config ?? {}) })
-    if (!config?.name) this.#serverName = 'default'
-    else this.#serverName = config.name
-    const _instance = instanceMap.get(this.#serverName)
-    if (_instance) return _instance
-    this.#init()
-    instanceMap.set(this.#serverName, this)
-    return this
+    this.#init(config ?? {})
   }
 
-  #init() {
+  #init(config: RequestInstanceConfig) {
+    if (config?.name) this.#serverName = config.name
+    const _instance = instanceMap.get(this.#serverName)
+    if (_instance) return _instance
     const { success: reqS, error: reqE } = Interceptor.request.angel
     const { success: resS, error: resE } = Interceptor.response.angel
     this.interceptors.request.use(reqS, reqE, { synchronous: true })
     this.interceptors.response.use(resS, resE, { synchronous: true })
+    instanceMap.set(this.#serverName, this)
+    return this
   }
 }
 
@@ -52,15 +50,13 @@ export function getRequestInstance(name: ServiceName) {
     ..._defaultConfig,
     baseURL: pathResolve(_defaultConfig?.baseURL!, servicePath[name])
   }
-  const instance = new RequestInstance({ name, ...config })
-  instanceMap.set(name, instance)
-  return instance
+  return new RequestInstance({ name, ...config })
 }
 
 export function useRequest<R = AngelResponse, D = any>(config: AngelMicroServeRequestConfig<D>) {
   const _config = BaseConfig.get('default')
   if (!_config) throw new Error(Errors.NoDefaultConfig)
-  const instance = new RequestInstance(config)
+  const instance = new RequestInstance(_config)
   return instance.request<any, R, D>(config)
 }
 
@@ -71,7 +67,7 @@ export function usePost<R = AngelResponse, D = any>(
 ) {
   const _config = BaseConfig.get('default')
   if (!_config) throw new Error(Errors.NoDefaultConfig)
-  const instance = new RequestInstance(config)
+  const instance = new RequestInstance(_config)
   return instance.post<any, R, D>(url, data, config)
 }
 
@@ -81,7 +77,7 @@ export function useGet<R = AngelResponse, D = any>(
 ) {
   const _config = BaseConfig.get('default')
   if (!_config) throw new Error(Errors.NoDefaultConfig)
-  const instance = new RequestInstance(config)
+  const instance = new RequestInstance(_config)
   return instance.get<any, R, D>(url, config)
 }
 

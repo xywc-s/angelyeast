@@ -1,4 +1,5 @@
 import { ElNotification, notificationTypes } from 'element-plus'
+import 'element-plus/theme-chalk/el-notification.css'
 import { isObject, isString, merge } from 'lodash-es'
 import type { NotificationParams } from 'element-plus'
 

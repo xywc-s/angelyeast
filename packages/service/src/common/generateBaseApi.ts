@@ -15,6 +15,7 @@ export function generateBaseApi<Entity>(
   }
 ) {
   if (/^\//.test(controller)) controller = controller.slice(1)
+  if (/\/$/.test(controller)) controller = controller.slice(0, -1)
   const getInstance = () => {
     const _defaultInstance = instanceMap.get('default')
     if (!options?.instance && !_defaultInstance) throw new Error(Errors.NoDefaultConfigOrInstance)
@@ -26,34 +27,43 @@ export function generateBaseApi<Entity>(
   }
   return {
     /** 条件查询 */
-    searchByCondition: <D extends object>(data: D, config?: AngelMicroServeRequestConfig<D>) =>
-      getInstance().post<any, AngelResponse<Entity>>(`/${controller}/searchByCondition`, data, {
+    searchByCondition: <D extends object, R = AngelResponse<Entity>>(
+      data: D,
+      config?: AngelMicroServeRequestConfig<D>
+    ) =>
+      getInstance().post<any, R>(`/${controller}/searchByCondition`, data, {
         ...json,
         ...(config ?? {})
       }),
 
     /** 单个实例查询 */
-    findEntity: <D extends object>(data: D, config?: AngelMicroServeRequestConfig<D>) =>
-      getInstance().post<any, AngelResponse<any, Entity>>(
-        `/${controller}/findEntity`,
-        data,
-        config
-      ),
+    findEntity: <D extends object, R = AngelResponse<any, Entity>>(
+      data: D,
+      config?: AngelMicroServeRequestConfig<D>
+    ) => getInstance().post<any, R>(`/${controller}/findEntity`, data, config),
 
     /** 分页查询 */
-    findAll: <D extends Partial<Sort & Pager>>(data: D, config?: AngelMicroServeRequestConfig<D>) =>
-      getInstance().post<any, AngelResponse<Entity>>(`/${controller}/findAll`, data, config),
+    findAll: <D extends Partial<Pager & Sort>, R = AngelResponse<Entity>>(
+      data: D,
+      config?: AngelMicroServeRequestConfig<D>
+    ) => getInstance().post<any, R>(`/${controller}/findAll`, data, config),
 
     /** 创建 */
-    create: <D extends Partial<Entity>>(data: D, config?: AngelMicroServeRequestConfig<D>) =>
-      getInstance().post<any, AngelResponse<any, string>>(`/${controller}/save`, data, config),
+    create: <D extends Partial<Entity>, R = AngelResponse<any, string>>(
+      data: D,
+      config?: AngelMicroServeRequestConfig<D>
+    ) => getInstance().post<any, R>(`/${controller}/save`, data, config),
 
     /** 更新 */
-    update: <D extends Partial<Entity>>(data: D, config?: AngelMicroServeRequestConfig<D>) =>
-      getInstance().post<any, AngelResponse>(`/${controller}/update`, data, config),
+    update: <D extends Partial<Entity>, R = AngelResponse<any, string>>(
+      data: D,
+      config?: AngelMicroServeRequestConfig<D>
+    ) => getInstance().post<any, R>(`/${controller}/update`, data, config),
 
     /** 删除 */
-    remove: <D extends Partial<Entity>>(data: D, config?: AngelMicroServeRequestConfig<D>) =>
-      getInstance().post<any, AngelResponse>(`/${controller}/delete`, data, config)
+    remove: <D extends Partial<Entity>, R = AngelResponse>(
+      data: D,
+      config?: AngelMicroServeRequestConfig<D>
+    ) => getInstance().post<any, R>(`/${controller}/delete`, data, config)
   }
 }

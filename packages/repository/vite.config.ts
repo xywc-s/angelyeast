@@ -18,7 +18,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'axios',
-        // 'element-plus',
+        'element-plus',
         'lodash-es',
         'js-base64',
         '@vueuse/core',
