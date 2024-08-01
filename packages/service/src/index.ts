@@ -32,7 +32,7 @@ export function setServiceConfig(
  * 使用服务API, 指定名称则返回指定服务, 否则返回所有服务
  * @param name 服务名
  */
-export function useService<K extends ServiceName>(name: K): Services[K]
+export function useService<K extends Exclude<ServiceName, 'default'>>(name: K): Services[K]
 export function useService(): Services
 export function useService(name?: ServiceName) {
   if (name) {

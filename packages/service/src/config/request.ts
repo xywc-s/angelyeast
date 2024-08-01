@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig } from 'axios'
 import type { FetchOptions } from '@angelyeast/repository'
 
 export interface Options<P, T> extends FetchOptions<P, T> {
@@ -41,6 +41,6 @@ export const json: AxiosRequestConfig = {
 export const common: AngelMicroServeRequestConfig = {
   ...form,
   serveAuth: true,
-  timeout: 20000,
-  withCredentials: false
+  timeout: 20 * 1000
+  // adapter: 'fetch'
 }

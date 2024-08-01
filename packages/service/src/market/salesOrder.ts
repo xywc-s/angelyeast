@@ -1,7 +1,7 @@
 import { assign } from 'lodash-es'
 import { json } from '../config'
 import { usePost } from './request'
-import { generateBaseApi, getRequestInstance } from '../common'
+import { generateBaseApi, RequestInstance } from '../common'
 import type { AngelResponse } from '@angelyeast/types'
 
 const {
@@ -11,7 +11,7 @@ const {
   remove,
   update
 } = generateBaseApi('salesOrder', {
-  instance: () => getRequestInstance('Market')
+  instance: () => RequestInstance.getInstance('Market')
 })
 
 export { findEntity, create, remove, update }

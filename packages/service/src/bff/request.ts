@@ -1,11 +1,11 @@
-import { getRequestInstance as getReqInstance } from '../common/instance'
+import { RequestInstance } from '../common/instance'
 import BFFResponseIntercertor from '../interceptors/response/bff'
 import type { AxiosRequestConfig } from 'axios'
 
 const { success, error } = BFFResponseIntercertor
 
 function getRequestInstance() {
-  const instance = getReqInstance('BFF')
+  const instance = RequestInstance.getInstance('BFF')
   instance.interceptors.response.use(success, error, {
     synchronous: true
   })

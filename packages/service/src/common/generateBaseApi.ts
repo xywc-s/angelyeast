@@ -1,8 +1,8 @@
 // 生成服务端默认api
 import { Errors, json, type AngelMicroServeRequestConfig } from '../config'
 import { AngelResponse, Sort, Pager } from '@angelyeast/types'
-import { isFunction } from 'lodash-es'
-import { instanceMap, type RequestInstance } from './instance'
+import { RequestInstance } from './instance'
+import { Axios, type AxiosInstance } from 'axios'
 
 /**  生成服务端默认API */
 export function generateBaseApi<Entity>(
@@ -11,19 +11,20 @@ export function generateBaseApi<Entity>(
   /** 选项 */
   options?: {
     /** 指定axios请求实例, 否则使用默认微服务实例 */
-    instance?: RequestInstance | (() => RequestInstance)
+    instance?: AxiosInstance | (() => AxiosInstance)
   }
 ) {
   if (/^\//.test(controller)) controller = controller.slice(1)
   if (/\/$/.test(controller)) controller = controller.slice(0, -1)
   const getInstance = () => {
-    const _defaultInstance = instanceMap.get('default')
+    const _defaultInstance = RequestInstance.getInstance('default')
+    console.log('🚀 ~ getInstance ~ _defaultInstance:', _defaultInstance)
     if (!options?.instance && !_defaultInstance) throw new Error(Errors.NoDefaultConfigOrInstance)
-    return options?.instance
-      ? isFunction(options.instance)
-        ? options.instance()
-        : options.instance
-      : _defaultInstance!
+    if (options?.instance) {
+      return options.instance instanceof Axios ? options.instance : options.instance()
+    } else {
+      return _defaultInstance
+    }
   }
   return {
     /** 条件查询 */

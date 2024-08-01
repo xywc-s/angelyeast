@@ -21,4 +21,4 @@ export const ServiceMap = {
 }
 
 export type Services = Readonly<typeof ServiceMap>
-export type ServiceName = keyof Services
+export type ServiceName = keyof Services | 'default'

@@ -1,4 +1,4 @@
-import { Axios } from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 import { common, AngelMicroServeRequestConfig, BaseConfig, Errors } from '../config'
 import Interceptor from '../interceptors'
 import type { ServiceName } from '../config'
@@ -8,80 +8,86 @@ export interface RequestInstanceConfig extends AngelMicroServeRequestConfig {
   /** 服务名称, 不传则使用微服务默认配置 */
   name?: ServiceName
 }
-export const instanceMap: Map<ServiceName | 'default', RequestInstance> = new Map()
-export class RequestInstance extends Axios {
-  #serverName: ServiceName | 'default' = 'default'
+export const instanceMap: Map<ServiceName, AxiosInstance> = new Map()
+export class RequestInstance {
+  #serverName: ServiceName = 'default'
   constructor(config?: RequestInstanceConfig) {
-    super({ ...common, ...(config ?? {}) })
-    this.#init(config ?? {})
+    const _config = { ...common, ...(config ?? {}) }
+    if (config?.name) this.#serverName = config.name
+    if (!RequestInstance.instanceMap.get(this.#serverName)) this.#init(_config)
   }
+  static instanceMap: Map<ServiceName, AxiosInstance> = new Map()
 
   #init(config: RequestInstanceConfig) {
-    if (config?.name) this.#serverName = config.name
-    const _instance = instanceMap.get(this.#serverName)
-    if (_instance) return _instance
+    const instance = axios.create(config)
     const { success: reqS, error: reqE } = Interceptor.request.angel
     const { success: resS, error: resE } = Interceptor.response.angel
-    this.interceptors.request.use(reqS, reqE, { synchronous: true })
-    this.interceptors.response.use(resS, resE, { synchronous: true })
-    instanceMap.set(this.#serverName, this)
-    return this
+    instance.interceptors.request.use(reqS, reqE, { synchronous: true })
+    instance.interceptors.response.use(resS, resE, { synchronous: true })
+    instanceMap.set(this.#serverName, instance)
+    RequestInstance.instanceMap.set(this.#serverName, instance)
+  }
+
+  static getInstance(name: ServiceName) {
+    if (!RequestInstance.instanceMap.get(name)) {
+      const _defaultConfig = BaseConfig.get('default')
+      const serviceConfig = BaseConfig.get(name)
+      if (!serviceConfig && !_defaultConfig?.baseURL) throw new Error(Errors.NoDefaultConfig)
+      const config = serviceConfig ?? {
+        ..._defaultConfig,
+        baseURL: pathResolve(_defaultConfig?.baseURL!, servicePath[name])
+      }
+      new RequestInstance({ name, ...config })
+    }
+    return RequestInstance.instanceMap.get(name)!
   }
 }
 
-const servicePath: Record<ServiceName, string> = {
+const servicePath: Record<Exclude<ServiceName, 'default' | 'OPEN'>, string> = {
   BFF: '/bff',
   Auth: '/security-server',
   MDM: '/mdm',
   MMS: '/mms',
-  Market: '/market',
-  OPEN: ''
+  Market: '/market'
 }
 
 /** 获取指定微服务的实例 */
-export function getRequestInstance(name: ServiceName) {
-  const _instance = instanceMap.get(name)
-  if (_instance) return _instance
-  const _defaultConfig = BaseConfig.get('default')
-  const serviceConfig = BaseConfig.get(name)
-  if (!serviceConfig && !_defaultConfig?.baseURL) throw new Error(Errors.NoDefaultConfig)
+// export function getRequestInstance(name: ServiceName) {
+//   const _instance = RequestInstance.instanceMap.get(name)
+//   if (_instance) return _instance
+//   const _defaultConfig = BaseConfig.get('default')
+//   const serviceConfig = BaseConfig.get(name)
+//   if (!serviceConfig && !_defaultConfig?.baseURL) throw new Error(Errors.NoDefaultConfig)
 
-  const config = serviceConfig ?? {
-    ..._defaultConfig,
-    baseURL: pathResolve(_defaultConfig?.baseURL!, servicePath[name])
-  }
-  return new RequestInstance({ name, ...config })
-}
+//   const config = serviceConfig ?? {
+//     ..._defaultConfig,
+//     baseURL: pathResolve(_defaultConfig?.baseURL!, servicePath[name])
+//   }
+//   new RequestInstance({ name, ...config })
+//   return RequestInstance.instanceMap.get(name)
+// }
 
 export function useRequest<R = AngelResponse, D = any>(config: AngelMicroServeRequestConfig<D>) {
-  const _config = BaseConfig.get('default')
-  if (!_config) throw new Error(Errors.NoDefaultConfig)
-  const instance = new RequestInstance(_config)
-  return instance.request<any, R, D>(config)
+  return RequestInstance.getInstance('default').request<any, R, D>(config)
 }
 
-export function usePost<R = AngelResponse, D = any>(
+export function usePost<D = any, R = AngelResponse>(
   url: string,
   data: D,
   config?: AngelMicroServeRequestConfig<D>
 ) {
-  const _config = BaseConfig.get('default')
-  if (!_config) throw new Error(Errors.NoDefaultConfig)
-  const instance = new RequestInstance(_config)
-  return instance.post<any, R, D>(url, data, config)
+  return RequestInstance.getInstance('default').post<any, R, D>(url, data, config)
 }
 
-export function useGet<R = AngelResponse, D = any>(
+export function useGet<D = any, R = AngelResponse>(
   url: string,
   config?: AngelMicroServeRequestConfig<D>
 ) {
-  const _config = BaseConfig.get('default')
-  if (!_config) throw new Error(Errors.NoDefaultConfig)
-  const instance = new RequestInstance(_config)
-  return instance.get<any, R, D>(url, config)
+  return RequestInstance.getInstance('default').get<any, R, D>(url, config)
 }
 
 function pathResolve(base: string, path: string) {
+  if (!path) return base
   if (/\/$/.test(base)) base = base.slice(0, -1)
   return base + path
 }

@@ -1,5 +1,5 @@
 import { assign } from 'lodash-es'
-import { generateBaseApi, getRequestInstance } from '../common'
+import { generateBaseApi, RequestInstance } from '../common'
 import type { SalesOrganizationConfig, SalesOrganizationConfigListParams } from '@angelyeast/model'
 
 export const {
@@ -10,7 +10,7 @@ export const {
   remove,
   update
 } = generateBaseApi<SalesOrganizationConfig>('salesOrganizationConfig', {
-  instance: () => getRequestInstance('Market')
+  instance: () => RequestInstance.getInstance('Market')
 })
 
 /**
