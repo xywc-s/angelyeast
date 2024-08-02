@@ -1,6 +1,6 @@
 import { reactive, ref, Ref } from 'vue'
 import { get } from '@vueuse/core'
-import { assign, cloneDeep, isFunction, merge } from 'lodash-es'
+import { assign, cloneDeep, isFunction, merge, get as getFieldValue } from 'lodash-es'
 import { defaultOptions } from './config'
 import type { PagerProps, ApiOptions, BaseOptions } from './config'
 import type { VxeGridPropTypes } from 'vxe-table'
@@ -115,7 +115,8 @@ export class BaseTable<D> {
     if (!isFunction(this._onQuery)) throw new Error('查询接口函数必须是一个Promise函数')
 
     this._options.loading = true
-    let params = { dataKey: 'rows' } as SearchParams
+    let dataKey = data?.dataKey ?? 'rows'
+    let params = {} as P
     // 如果配置了分页器, 将分页参数设置为接口参数
     if (this._options.pagerConfig?.enabled) {
       params[this._options.pagerConfig.pageKey as string] = this._options.pagerConfig.currentPage
@@ -124,7 +125,7 @@ export class BaseTable<D> {
     // 将过滤器和附件参数设置为接口参数
     assign(params, get(this._filters), data ?? {})
     if (this._queryOptions?.onBefore) {
-      const refactoryParams = this._queryOptions.onBefore(params) as SearchParams
+      const refactoryParams = this._queryOptions.onBefore(params) as P
       if (refactoryParams) params = refactoryParams
     }
 
@@ -133,7 +134,7 @@ export class BaseTable<D> {
         if (this._queryOptions?.onSuccess) {
           this._queryOptions.onSuccess(result, this._options)
         } else {
-          this._options.data = result[params['dataKey']]
+          this._options.data = getFieldValue(result, dataKey)
           this._options.pagerConfig!.currentPage =
             params[this._options.pagerConfig!.pageKey as string]
           this._options.pagerConfig!.total = result?.total
