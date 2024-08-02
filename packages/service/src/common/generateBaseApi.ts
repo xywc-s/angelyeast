@@ -18,7 +18,6 @@ export function generateBaseApi<Entity>(
   if (/\/$/.test(controller)) controller = controller.slice(0, -1)
   const getInstance = () => {
     const _defaultInstance = RequestInstance.getInstance('default')
-    console.log('🚀 ~ getInstance ~ _defaultInstance:', _defaultInstance)
     if (!options?.instance && !_defaultInstance) throw new Error(Errors.NoDefaultConfigOrInstance)
     if (options?.instance) {
       return options.instance instanceof Axios ? options.instance : options.instance()

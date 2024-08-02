@@ -8,7 +8,6 @@ export interface RequestInstanceConfig extends AngelMicroServeRequestConfig {
   /** 服务名称, 不传则使用微服务默认配置 */
   name?: ServiceName
 }
-export const instanceMap: Map<ServiceName, AxiosInstance> = new Map()
 export class RequestInstance {
   #serverName: ServiceName = 'default'
   constructor(config?: RequestInstanceConfig) {
@@ -24,10 +23,10 @@ export class RequestInstance {
     const { success: resS, error: resE } = Interceptor.response.angel
     instance.interceptors.request.use(reqS, reqE, { synchronous: true })
     instance.interceptors.response.use(resS, resE, { synchronous: true })
-    instanceMap.set(this.#serverName, instance)
     RequestInstance.instanceMap.set(this.#serverName, instance)
   }
 
+  /** 获取指定微服务的实例 */
   static getInstance(name: ServiceName) {
     if (!RequestInstance.instanceMap.get(name)) {
       const _defaultConfig = BaseConfig.get('default')
@@ -50,22 +49,6 @@ const servicePath: Record<Exclude<ServiceName, 'default' | 'OPEN'>, string> = {
   MMS: '/mms',
   Market: '/market'
 }
-
-/** 获取指定微服务的实例 */
-// export function getRequestInstance(name: ServiceName) {
-//   const _instance = RequestInstance.instanceMap.get(name)
-//   if (_instance) return _instance
-//   const _defaultConfig = BaseConfig.get('default')
-//   const serviceConfig = BaseConfig.get(name)
-//   if (!serviceConfig && !_defaultConfig?.baseURL) throw new Error(Errors.NoDefaultConfig)
-
-//   const config = serviceConfig ?? {
-//     ..._defaultConfig,
-//     baseURL: pathResolve(_defaultConfig?.baseURL!, servicePath[name])
-//   }
-//   new RequestInstance({ name, ...config })
-//   return RequestInstance.instanceMap.get(name)
-// }
 
 export function useRequest<R = AngelResponse, D = any>(config: AngelMicroServeRequestConfig<D>) {
   return RequestInstance.getInstance('default').request<any, R, D>(config)
