@@ -34,7 +34,7 @@ export interface FetchOptions<P, T> {
 export async function useFetch<F extends Lazy>(
   fn: F,
   options?: Partial<FetchOptions<Parameters<F>, LazyReturnType<F>>>
-) {
+): Promise<LazyReturnType<F> | undefined> {
   options = Object.assign({ autoNotify: true }, options)
   options.loading && checkAndToggleLoading(options.loading, true)
   const f = () => (options?.params ? fn(...(options!.params as any[])) : fn())
