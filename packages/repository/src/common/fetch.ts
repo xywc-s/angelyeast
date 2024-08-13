@@ -34,10 +34,14 @@ export interface FetchOptions<P, T> {
 export async function useFetch<F extends Lazy>(
   fn: F,
   options?: Partial<FetchOptions<Parameters<F>, LazyReturnType<F>>>
-): Promise<LazyReturnType<F> | undefined> {
+): Promise<LazyReturnType<F>> {
   options = Object.assign({ autoNotify: true }, options)
   options.loading && checkAndToggleLoading(options.loading, true)
   const f = () => (options?.params ? fn(...(options!.params as any[])) : fn())
+  const onFinally = () => {
+    options?.loading && checkAndToggleLoading(options.loading, false)
+    if (options?.onFinally) options?.onFinally()
+  }
   try {
     const res = await f()
     const { success, message } = res as AngelResponse
@@ -48,13 +52,12 @@ export async function useFetch<F extends Lazy>(
       message && ElMessage.error(message)
       if (options?.onError) options?.onError(res)
     }
-    options?.loading && checkAndToggleLoading(options.loading, false)
-    if (options?.onFinally) options?.onFinally()
+    onFinally()
     return res
-  } catch (error) {
+  } catch (error: any) {
     if (options?.onError) options?.onError(error)
-    options?.loading && checkAndToggleLoading(options.loading, false)
-    if (options?.onFinally) options?.onFinally()
+    onFinally()
+    throw new Error(error)
   }
 }
 
