@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/component",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "组件包",
   "scripts": {
     "build": "rm -rf es && rm -rf lib && vite build"
