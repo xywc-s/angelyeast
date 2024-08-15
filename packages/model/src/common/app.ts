@@ -1,8 +1,8 @@
 export {}
 import type { App, ComponentCustomProperties } from 'vue'
-import type { PermissionCodes, JWT } from '../auth'
+import type { PermissionCodes, User } from '../auth'
 export interface MiddleStoreGetters {
-  user: JWT
+  user: User
   language: string
   token?: string
   permissionList?: PermissionCodes
