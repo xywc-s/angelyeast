@@ -40,22 +40,20 @@ export async function useFetch<F extends Lazy>(
   const f = () => (options?.params ? fn(...(options!.params as any[])) : fn())
   const onFinally = () => {
     options?.loading && checkAndToggleLoading(options.loading, false)
-    if (options?.onFinally) options?.onFinally()
+    options?.onFinally && options?.onFinally()
   }
   try {
     const res = await f()
     const { success, message } = res as AngelResponse
-    if (success) {
-      options?.autoNotify && message && ElMessage.success(message)
-      if (options?.onSuccess) options?.onSuccess(res)
-    } else {
-      message && ElMessage.error(message)
-      if (options?.onError) options?.onError(res)
-    }
+    success && options?.autoNotify && message && ElMessage.success(message)
+    success && options?.onSuccess && options?.onSuccess(res)
+    !success && message && ElMessage.error(message)
+    !success && options?.onError && options?.onError(res)
     onFinally()
+    if (!success) throw new Error(message)
     return res
   } catch (error: any) {
-    if (options?.onError) options?.onError(error)
+    options?.onError && options?.onError(error)
     onFinally()
     throw new Error(error)
   }
