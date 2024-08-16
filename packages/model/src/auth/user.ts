@@ -66,6 +66,7 @@ export type UserFuzzySearchParams = {
 export type UserListParams = Partial<Pager & Sort & UserFuzzySearchParams>
 
 export interface User {
+  avatar?: string
   code: string
   deleted: string
   dingTalkJson?: any
