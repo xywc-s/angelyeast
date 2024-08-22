@@ -3,7 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "module": "ESNext",
-    "target": "ES6",
+    "target": "ESNext",
     "noEmit": true, //禁止ts生成, 通过其他工具生成，如dts
     "isolatedModules": true,
     "noUnusedLocals": true,
