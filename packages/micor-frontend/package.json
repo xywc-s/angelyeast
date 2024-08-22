@@ -1,0 +1,48 @@
+{
+  "name": "@angelyeast/micro-frontend",
+  "version": "2.1.1",
+  "description": "微前端",
+  "private": false,
+  "scripts": {
+    "build": "rm -rf es && rm -rf lib && rm -rf types && vite build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "xywc-s",
+    "email": "xywc_s@foxmail.com",
+    "url": "https://github.com/xywc-s"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "dependencies": {
+    "mitt": "^3.0.1"
+  },
+  "devDependencies": {
+    "@angelyeast/model": "workspace:*",
+    "@angelyeast/service": "workspace:*",
+    "@angelyeast/types": "workspace:*",
+    "@angelyeast/repository": "workspace:*",
+    "@types/lodash-es": "^4.17.6",
+    "@vueuse/core": "^9.13.0",
+    "dayjs": "^1.11.10",
+    "js-base64": "^3.7.7",
+    "lodash-es": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@angelyeast/model": "workspace:*",
+    "@angelyeast/service": "workspace:*",
+    "@angelyeast/types": "workspace:*",
+    "@angelyeast/repository": "workspace:*",
+    "@vueuse/core": ">=9.13.0",
+    "dayjs": ">=1",
+    "lodash-es": ">=4.17.21",
+    "vue-router": ">=4",
+    "vue": ">=3.2.*"
+  }
+}
