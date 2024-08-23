@@ -11,6 +11,15 @@ export interface JWT extends Pick<User, 'id' | 'code' | 'email' | 'name' | 'phon
   jti: string
 }
 
+export interface Token
+  extends Pick<User, 'id' | 'code' | 'email' | 'name' | 'phone'>,
+    Pick<JWT, 'jti' | 'scope'> {
+  client_id: string
+  exp: number
+  permissionList: PermissionCode[]
+  tokenKey: string
+}
+
 export interface WechatJSON {
   name: string
   /** 部门id */

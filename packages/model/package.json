@@ -24,10 +24,12 @@
     "pnpm": "^7"
   },
   "devDependencies": {
-    "@angelyeast/types": "workspace:*"
+    "@angelyeast/types": "workspace:*",
+    "mitt": "^3.0.1"
   },
   "peerDependencies": {
-    "vue": ">=3.*",
-    "@angelyeast/types": "workspace:*"
+    "@angelyeast/types": "workspace:*",
+    "mitt": "^3.0.1",
+    "vue": ">=3.*"
   }
 }
