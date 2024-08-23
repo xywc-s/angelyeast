@@ -3,7 +3,6 @@ import { isRef } from 'vue'
 import { isFunction } from 'lodash-es'
 import type { Ref } from 'vue'
 import type { AngelResponse, Lazy, LazyReturnType } from '@angelyeast/types'
-import 'element-plus/es/components/message/style/index.mjs'
 
 export type LoadingInstance = ReturnType<typeof ElLoadingService>
 export type FetchLoading = Ref<boolean> | ((b: boolean) => void) | LoadingInstance

@@ -17,10 +17,9 @@ export default defineConfig({
     minify: false,
     rollupOptions: {
       external: [
-        'axios',
-        'element-plus',
-        'lodash-es',
         'js-base64',
+        'lodash-es',
+        'element-plus',
         '@vueuse/core',
         'vue',
         'vxe-table',

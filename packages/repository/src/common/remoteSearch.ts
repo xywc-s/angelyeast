@@ -25,7 +25,7 @@ export function useRemoteSearch(
   const querySearchAsync = async (queryString: string, cb: Function) => {
     let filterMethod = (item: any) => item
     if (isString(key)) {
-      filterMethod = (item) => item[key].toLowerCase().indexOf(queryString.toLowerCase()) === 0
+      filterMethod = (item) => item[key].toLowerCase().indexOf(queryString.toLowerCase()) > -1
     }
     if (isFunction(key)) filterMethod = key
 

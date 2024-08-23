@@ -26,17 +26,16 @@
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^9.13.0",
     "element-plus": "^2.2.36",
-    "lodash-es": "^4.17.21",
-    "js-base64": "^3.7.7",
     "vxe-table": "^4.5.20"
   },
   "peerDependencies": {
     "@angelyeast/model": "workspace:*",
     "@angelyeast/types": "workspace:*",
-    "vxe-table": ">=4",
     "@vueuse/core": ">=9.13.0",
-    "element-plus": "^2.2.36",
-    "lodash-es": ">=4.17.21",
-    "vue": ">=3.2.*"
+    "element-plus": ">=2.2",
+    "js-base64": ">=3",
+    "lodash-es": ">=4.17",
+    "vue": ">=3.2.*",
+    "vxe-table": ">=4"
   }
 }

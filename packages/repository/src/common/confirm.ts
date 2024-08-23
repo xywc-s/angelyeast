@@ -1,5 +1,4 @@
 import { ElMessageBox } from 'element-plus'
-import 'element-plus/theme-chalk/el-message-box.css'
 import type { ElMessageBoxOptions, MessageBoxData } from 'element-plus'
 
 /**

@@ -1,5 +1,4 @@
 import { ElNotification, notificationTypes } from 'element-plus'
-import 'element-plus/theme-chalk/el-notification.css'
 import { isObject, isString, merge } from 'lodash-es'
 import type { NotificationParams } from 'element-plus'
 
@@ -9,7 +8,7 @@ import type { NotificationParams } from 'element-plus'
  * @param options 选项
  * @param type 类型
  */
-export function useNotify(options: NotificationParams, type?: typeof notificationTypes[number]) {
+export function useNotify(options: NotificationParams, type?: (typeof notificationTypes)[number]) {
   const Params = {
     duration: 2500
   }

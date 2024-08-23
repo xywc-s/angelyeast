@@ -1,6 +1,6 @@
 import { set } from 'lodash-es'
 import { encode } from 'js-base64'
-import { isWorkWechat } from '../utils'
+import { isWorkWechat } from '../utils/isWorkWechat'
 import { isMobile } from './breakpoint'
 import { useNotify } from './notify'
 
@@ -23,8 +23,11 @@ export const setFileServer = (options: typeof fileServer) => {
  * @param url 文件地址
  */
 export const previewFile = (url: string) => {
-  if (!fileServer.filePreviewDomain || !fileServer.fileServerDomain)
-    return useNotify('文件服务器地址未配置, 请先配置文件服务器地址!')
+  if (!fileServer.filePreviewDomain || !fileServer.fileServerDomain) {
+    const err = '文件服务器地址未配置, 请先配置文件服务器地址!'
+    useNotify(err, 'error')
+    throw new Error(err)
+  }
   if (/^\/middle\/.*/.test(url)) url = fileServer.fileServerDomain + url
   // 如果是企业微信手机端预览文件则直接打开文件
   if (isWorkWechat() && isMobile()) {
