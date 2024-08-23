@@ -10,7 +10,7 @@ export interface MiddleStoreGetters {
   serverTime: string
   [k: string]: any
 }
-export interface MiddleApp<Events extends Record<EventType, unknown>>
+export interface MiddleApp<Events extends Record<EventType, unknown> = any>
   extends App,
     ComponentCustomProperties,
     Record<string, unknown> {
