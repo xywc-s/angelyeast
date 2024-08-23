@@ -1,14 +1,12 @@
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import dayjs from 'dayjs'
 import { useStorage } from '@vueuse/core'
-import { useService } from '@angelyeast/service'
-import { useNotify } from '@angelyeast/repository'
 import { decode } from 'js-base64'
 import { useAppInstance } from '../app/instance'
 import { useDate } from '../app/date'
 import { useUser } from './user'
 import { usePermission } from './permission'
-import type { JWT } from '@angelyeast/model'
+import type { JWT, Token } from '@angelyeast/model'
 
 const tokenStorage = useStorage('Middle-Api-Token', '')
 export function useToken() {
@@ -16,8 +14,18 @@ export function useToken() {
   const { getUserInfo } = useUser()
   const { setPermissionList } = usePermission()
 
-  const jwt = ref<JWT>()
   const accessToken = computed(() => mainApp.value?.$store?.getters?.token ?? tokenStorage.value)
+  const accessTokenInfo = computed<Token>(() =>
+    accessToken.value ? JSON.parse(decode(accessToken.value.split('.')[1])) : null
+  )
+
+  async function initState() {
+    if (accessTokenInfo.value) {
+      const { permissionList, code } = accessTokenInfo.value
+      setPermissionList(permissionList)
+      await getUserInfo(code)
+    }
+  }
 
   /** 检查accessToken是否有效 */
   function checkTokenValid() {
@@ -26,38 +34,18 @@ export function useToken() {
     return exp ? dayjs.unix(exp).isAfter(useDate().serverTime.value) : false
   }
 
-  /** 是否配置了开发token */
-  function hasDevToken() {
-    return Boolean(import.meta.env.VITE_USER_TOKEN && import.meta.env.VITE_USER_CODE)
-  }
-
-  /** 使用开发token登录 */
-  async function devLogin() {
-    const { object, message } = await useService('Auth').loginForDev({
-      code: import.meta.env.VITE_USER_CODE,
-      token: import.meta.env.VITE_USER_TOKEN
-    })
-    if (!object) useNotify(message, 'error')
-    else setJWT(JSON.parse(object))
-  }
-
-  function setJWT(_jwt: JWT) {
-    jwt.value = _jwt
-    localStorage.setItem('Middle-Api-Token', _jwt.access_token)
-    localStorage.setItem('Middle-Api-Refresh-Token', _jwt.refresh_token)
-    setPermissionList(_jwt.permissionList)
-    getUserInfo(_jwt.id)
+  function setJWT(jwt: JWT) {
+    localStorage.setItem('Middle-Api-Token', jwt.access_token)
+    localStorage.setItem('Middle-Api-Refresh-Token', jwt.refresh_token)
+    initState()
   }
 
   return {
-    jwt,
     accessToken,
+    /** 初始化token相关的状态数据 */
+    initState,
     /** 检查accessToken是否有效 */
     checkTokenValid,
-    /** 是否配置了开发token */
-    hasDevToken,
-    /** 使用开发token登录 */
-    devLogin,
     setJWT
   }
 }

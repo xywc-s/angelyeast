@@ -12,7 +12,7 @@ export function useUser() {
   /** 系统当前登录的用户 */
   const user = computed(() => mainApp.value?.$store?.getters?.user ?? userStorage.value)
 
-  function setUser(obj: User) {
+  function setUser(obj?: User) {
     userStorage.value = obj
   }
 
