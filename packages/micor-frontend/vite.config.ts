@@ -4,6 +4,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [
     dts({
+      copyDtsFiles: true,
       outputDir: 'types'
     })
   ],
@@ -15,7 +16,6 @@ export default defineConfig({
   build: {
     outDir: 'lib',
     minify: false,
-    // sourcemap: true,
     rollupOptions: {
       external: [
         '@vueuse/core',
