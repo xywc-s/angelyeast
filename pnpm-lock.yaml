@@ -54,11 +54,37 @@ importers:
       vue-eslint-parser: 9.3.2_eslint@8.56.0
       vue-router: 4.2.5_vue@3.3.13
 
+  packages/micor-frontend:
+    specifiers:
+      '@angelyeast/model': workspace:*
+      '@angelyeast/repository': workspace:*
+      '@angelyeast/service': workspace:*
+      '@angelyeast/types': workspace:*
+      '@types/lodash-es': ^4.17.6
+      '@vueuse/core': ^9.13.0
+      dayjs: ^1.11.10
+      js-base64: ^3.7.7
+      lodash-es: ^4.17.21
+      mitt: ^3.0.1
+    devDependencies:
+      '@angelyeast/model': link:../model
+      '@angelyeast/repository': link:../repository
+      '@angelyeast/service': link:../service
+      '@angelyeast/types': link:../types
+      '@types/lodash-es': 4.17.12
+      '@vueuse/core': 9.13.0
+      dayjs: 1.11.10
+      js-base64: 3.7.7
+      lodash-es: 4.17.21
+      mitt: 3.0.1
+
   packages/model:
     specifiers:
       '@angelyeast/types': workspace:*
+      mitt: ^3.0.1
     devDependencies:
       '@angelyeast/types': link:../types
+      mitt: 3.0.1
 
   packages/repository:
     specifiers:
@@ -101,6 +127,7 @@ importers:
 
   playground/demo:
     specifiers:
+      '@angelyeast/micro-frontend': workspace:*
       '@angelyeast/model': workspace:*
       '@angelyeast/repository': workspace:*
       '@angelyeast/service': workspace:*
@@ -151,6 +178,7 @@ importers:
       vxe-table-plugin-element: ^4.0.0
       xe-utils: ~3.5.20
     dependencies:
+      '@angelyeast/micro-frontend': link:../../packages/micor-frontend
       '@angelyeast/model': link:../../packages/model
       '@angelyeast/repository': link:../../packages/repository
       '@angelyeast/service': link:../../packages/service
@@ -1993,7 +2021,7 @@ packages:
       '@types/web-bluetooth': 0.0.16
       '@vueuse/metadata': 9.13.0
       '@vueuse/shared': 9.13.0
-      vue-demi: 0.14.6
+      vue-demi: 0.14.10
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2081,7 +2109,7 @@ packages:
   /@vueuse/shared/9.13.0:
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
     dependencies:
-      vue-demi: 0.14.6
+      vue-demi: 0.14.10
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -5514,6 +5542,10 @@ packages:
       yallist: 4.0.0
     dev: true
 
+  /mitt/3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: true
+
   /mixin-deep/1.3.2:
     resolution: {integrity: sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==}
     engines: {node: '>=0.10.0'}
@@ -7631,6 +7663,19 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /vue-demi/0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dev: true
+
   /vue-demi/0.14.10_vue@3.3.13:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
     engines: {node: '>=12'}
@@ -7645,19 +7690,6 @@ packages:
     dependencies:
       vue: 3.3.13_typescript@5.3.3
     dev: false
-
-  /vue-demi/0.14.6:
-    resolution: {integrity: sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dev: true
 
   /vue-eslint-parser/9.3.2_eslint@8.56.0:
     resolution: {integrity: sha512-q7tWyCVaV9f8iQyIA5Mkj/S6AoJ9KBN8IeUSf3XEmBrOtxOZnfTg5s4KClbZBCK3GtnT/+RyCLZyDHuZwTuBjg==}
