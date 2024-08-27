@@ -1,6 +1,6 @@
 import { ElLoadingService, ElMessage } from 'element-plus'
 import { isRef } from 'vue'
-import { isFunction } from 'lodash-es'
+import { isArray, isFunction } from 'lodash-es'
 import type { Ref } from 'vue'
 import type { AngelResponse, Lazy, LazyReturnType } from '@angelyeast/types'
 
@@ -17,6 +17,14 @@ export interface FetchOptions<P, T> {
    * @default true
    */
   autoNotify: boolean
+  /**
+   * 是否立即执行函数
+   * @description 立即执行, 返回响应结果, 否则返回响应式数据和执行函数
+   * @default true
+   */
+  immediate: boolean
+  /** 返回指定key的响应式数据, 默认返回完整结果 */
+  // returnKey: 'rows' | 'object' | 'data'
   /** 成功响应时 */
   onSuccess: (response: T) => void
   /** 失败响应时 */
@@ -25,24 +33,26 @@ export interface FetchOptions<P, T> {
   onFinally: () => void
 }
 
+type Options<F extends Lazy> = Partial<FetchOptions<Parameters<F>, LazyReturnType<F>>>
+
 /**
  * 接口调用处理函数
  * @param fn 接口函数
  * @param options 选项参数
  */
-export async function useFetch<F extends Lazy>(
-  fn: F,
-  options?: Partial<FetchOptions<Parameters<F>, LazyReturnType<F>>>
-): Promise<LazyReturnType<F>> {
-  options = Object.assign({ autoNotify: true }, options)
+export async function useFetch<F extends Lazy>(fn: F, options?: Options<F>) {
+  options = Object.assign({ autoNotify: true, immediate: true }, options)
   options.loading && checkAndToggleLoading(options.loading, true)
-  const f = () => (options?.params ? fn(...(options!.params as any[])) : fn())
+
   const onFinally = () => {
     options?.loading && checkAndToggleLoading(options.loading, false)
     options?.onFinally && options?.onFinally()
   }
   try {
-    const res = await f()
+    const res: LazyReturnType<F> = await (options?.params ? fn(...(options.params as any[])) : fn())
+    // 如果是promise.all, 直接返回结果
+    if (isArray(res)) return res
+    // 如果是单个请求, 默认为微服务接口请求
     const { success, message } = res as AngelResponse
     success && options?.autoNotify && message && ElMessage.success(message)
     success && options?.onSuccess && options?.onSuccess(res)
