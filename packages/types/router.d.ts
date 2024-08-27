@@ -18,6 +18,8 @@ export type CustomeRouteMeta = {
   icon?: string
   /** 当前路由配置的权限 */
   permission?: string | string[]
+  /** 当前路由是否为白名单路由(跳过鉴权,无需登录,开放访问) */
+  whiteList?: boolean
 }
 
 export type CustomRoute = {
