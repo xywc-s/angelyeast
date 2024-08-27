@@ -1,6 +1,6 @@
 import { ElLoadingService, ElMessage } from 'element-plus'
 import { isRef } from 'vue'
-import { isArray, isFunction } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 import type { Ref } from 'vue'
 import type { AngelResponse, Lazy, LazyReturnType } from '@angelyeast/types'
 
@@ -50,8 +50,6 @@ export async function useFetch<F extends Lazy>(fn: F, options?: Options<F>) {
   }
   try {
     const res: LazyReturnType<F> = await (options?.params ? fn(...(options.params as any[])) : fn())
-    // 如果是promise.all, 直接返回结果
-    if (isArray(res)) return res
     // 如果是单个请求, 默认为微服务接口请求
     const { success, message } = res as AngelResponse
     success && options?.autoNotify && message && ElMessage.success(message)
