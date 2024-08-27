@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.json",
   "exclude": ["node_modules", "dist", "tsc", "es", "lib"],
   "compilerOptions": {
-    "composite": true,
-    "types": ["element-plus/global"]
+    "composite": true
   }
 }

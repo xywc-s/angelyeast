@@ -18,6 +18,9 @@ export default defineConfig({
     minify: false,
     rollupOptions: {
       external: [
+        'dayjs',
+        'js-base64',
+        'lodash-es',
         '@vueuse/core',
         'vue',
         'vue-router',

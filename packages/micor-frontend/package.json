@@ -21,10 +21,7 @@
     "types"
   ],
   "dependencies": {
-    "mitt": "^3.0.1",
-    "dayjs": ">=1",
-    "js-base64": ">=3",
-    "lodash-es": "^>=4.17"
+    "mitt": "^3.0.1"
   },
   "devDependencies": {
     "@angelyeast/model": "workspace:*",
@@ -32,13 +29,19 @@
     "@angelyeast/types": "workspace:*",
     "@angelyeast/repository": "workspace:*",
     "@types/lodash-es": "^4.17.6",
-    "@vueuse/core": "^9.13.0"
+    "@vueuse/core": "^9.13.0",
+    "dayjs": ">=1",
+    "js-base64": ">=3",
+    "lodash-es": ">=4.17"
   },
   "peerDependencies": {
     "@angelyeast/model": "workspace:*",
     "@angelyeast/service": "workspace:*",
     "@angelyeast/types": "workspace:*",
     "@angelyeast/repository": "workspace:*",
+    "dayjs": ">=1",
+    "js-base64": ">=3",
+    "lodash-es": ">=4.17",
     "@vueuse/core": ">=9.13.0",
     "vue-router": ">=4",
     "vue": ">=3.2.*"

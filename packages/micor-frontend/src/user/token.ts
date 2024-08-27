@@ -10,9 +10,7 @@ import type { JWT, Token } from '@angelyeast/model'
 
 const tokenStorage = useStorage('Middle-Api-Token', '')
 export function useToken() {
-  const { mainApp } = useAppInstance()
-  const { getUserInfo } = useUser()
-  const { setPermissionList } = usePermission()
+  const { mainApp, isChildApp } = useAppInstance()
 
   const accessToken = computed(() => mainApp.value?.$store?.getters?.token ?? tokenStorage.value)
   const accessTokenInfo = computed<Token>(() =>
@@ -22,7 +20,9 @@ export function useToken() {
   async function initState() {
     if (accessTokenInfo.value) {
       const { permissionList, code } = accessTokenInfo.value
+      const { setPermissionList } = usePermission()
       setPermissionList(permissionList)
+      const { getUserInfo } = useUser()
       await getUserInfo(code)
     }
   }
@@ -30,7 +30,7 @@ export function useToken() {
   /** 检查accessToken是否有效 */
   function checkTokenValid() {
     if (!accessToken.value) return false
-    const exp = JSON.parse(decode(accessToken.value.split('.')[1])).exp
+    const exp = accessTokenInfo.value.exp
     return exp ? dayjs.unix(exp).isAfter(useDate().serverTime.value) : false
   }
 
@@ -40,12 +40,24 @@ export function useToken() {
     initState()
   }
 
+  async function checkLoginState() {
+    // 子应用默认已登录, 登录由主应用控制
+    if (isChildApp.value) return true
+    // accessToken不存在 或者 存在但已过期
+    if (!accessToken.value || !checkTokenValid()) return false
+    //accessToken存在并且未过期
+    await initState()
+    return true
+  }
+
   return {
     accessToken,
     /** 初始化token相关的状态数据 */
     initState,
     /** 检查accessToken是否有效 */
     checkTokenValid,
+    /** 检查当前是否登录 */
+    checkLoginState,
     setJWT
   }
 }
