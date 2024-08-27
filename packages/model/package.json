@@ -29,7 +29,6 @@
   },
   "peerDependencies": {
     "@angelyeast/types": "workspace:*",
-    "mitt": "^3.0.1",
     "vue": ">=3.*"
   }
 }
