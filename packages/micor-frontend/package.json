@@ -1,6 +1,6 @@
 {
   "name": "@angelyeast/micro-frontend",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "微前端",
   "private": false,
   "scripts": {
