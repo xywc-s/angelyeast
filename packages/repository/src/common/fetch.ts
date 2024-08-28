@@ -57,7 +57,6 @@ export async function useFetch<F extends Lazy>(fn: F, options?: Options<F>) {
     !success && message && ElMessage.error(message)
     !success && options?.onError && options?.onError(res)
     onFinally()
-    if (!success) throw new Error(message)
     return res
   } catch (error: any) {
     options?.onError && options?.onError(error)
