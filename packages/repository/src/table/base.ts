@@ -98,7 +98,7 @@ export class BaseTable<D> {
 
   setQuery<F extends Lazy>(
     fn: F,
-    options: ApiOptions<BaseOptions<D>, LazyReturnType<F>, Parameters<F>>
+    options?: ApiOptions<BaseOptions<D>, LazyReturnType<F>, Parameters<F>>
   ) {
     this._onQuery = fn
     this._queryOptions = options
